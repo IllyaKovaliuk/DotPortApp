@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import MapKit
 
 
 class PortsViewModel: ObservableObject{
     @Published var ports: [PortModel] = []
-    @Published var ports_data: [PortModel] = [Mocks.port1, Mocks.port2, Mocks.port3, Mocks.port4, Mocks.port5, Mocks.port6, Mocks.port7, Mocks.port8, Mocks.port9]
+    @Published var ports_data: [PortModel] = [Mocks.port1, Mocks.port2, Mocks.port3, Mocks.port4, Mocks.port5, Mocks.port6, Mocks.port7, Mocks.port8, Mocks.port9, Mocks.port10]
     @Published var ships: [ShipModel] = []
     @Published var ships_data: [ShipModel] = [Mocks.ship1]
     
@@ -22,6 +23,13 @@ class PortsViewModel: ObservableObject{
             }
         }
         return count
+    }
+    
+    func parseCoords(port: PortModel) -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+                latitude: port.latitude,
+                longitude: port.longtitude
+            )
     }
     
     

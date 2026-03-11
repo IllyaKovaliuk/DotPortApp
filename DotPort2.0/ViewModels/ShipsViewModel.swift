@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class ShipsViewModel: ObservableObject{
     @Published var ships: [ShipModel] = []
     @Published var ships_data : [ShipModel] = [Mocks.ship1, Mocks.ship2, Mocks.ship3]
+    @Published var ship: ShipModel = Mocks.ship1
+    
+    init() {
+        
+    }
     
     
     var countShips: Int {
@@ -28,7 +34,44 @@ class ShipsViewModel: ObservableObject{
         return totalFuel
     }
     
+//    func validateContainers(ship: ShipModel, currentLoad: Int){
+//        let maxContainers = ship.capacity_containers
+//        if currentLoad <= maxContainers {
+//            print("We add your container to our ship")
+//        } else{
+//            Alert(title: Text("Перегруз"))
+//        }
+//        
+//    }
+    enum shipError: Error {
+        case invalidCountContainers
+        case invalidCapacity
+        case basicErrror
+    }
     
+    
+    func containersError(ship: ShipModel) throws {
+        var maxContainers = self.ship.capacity_containers
+        var currentLoad = self.ship.currentLoad
+        
+        guard currentLoad < maxContainers else {
+            throw shipError.invalidCapacity
+        }
+        
+        guard maxContainers > 0 else{
+            throw shipError.invalidCountContainers
+        }
+    }
+    
+    
+    func addContainer(oneConatiner: Int){
+        do {
+            try containersError(ship: self.ship)
+            self.ship.currentLoad += oneConatiner
+            print("Контейнер додано успішно!")
+        } catch {
+            print("Помилка: \(error)")        }
+    }
     
 }
 
@@ -37,3 +80,19 @@ class ShipsViewModel: ObservableObject{
 //let count = voyages.filter {$0.status == Status.In_progress}.count
 //return "\(count)"
 //}
+
+
+//    func addContainers(ship: ShipModel, oneContainer: Int){
+//        let maxContainers = ship.capacity_containers
+//        var currentLoad = ship.currentLoad
+//        if maxContainers < 0{
+//            throw shipError.invalidCapacity
+//        }
+//
+//        if currentLoad < maxContainers {
+//            currentLoad += oneContainer
+//            print("We add your container")
+//        } else {
+//            print("Sorry we cant load container, to much containers")
+//        }
+//    }

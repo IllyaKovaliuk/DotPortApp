@@ -10,10 +10,12 @@ import SwiftUI
 @main
 struct DotPort2_0App: App {
     @StateObject private var activityManager = ActivityManager()
+//    @StateObject private var vm = MapViewModel()
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environmentObject(activityManager)
+//                .environmentObject(vm)
         }
     }
 }

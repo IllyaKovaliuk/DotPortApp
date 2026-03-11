@@ -47,6 +47,11 @@
 		9DAA8FD52F5866C100EE3FD8 /* WidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FD42F5866C100EE3FD8 /* WidgetAttributes.swift */; };
 		9DAA8FD62F58675800EE3FD8 /* WidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FD42F5866C100EE3FD8 /* WidgetAttributes.swift */; };
 		9DAA8FD82F58FED000EE3FD8 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FD72F58FED000EE3FD8 /* ActivityManager.swift */; };
+		9DAA8FDA2F5C669800EE3FD8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FD92F5C669800EE3FD8 /* MapView.swift */; };
+		9DAA8FDC2F5C680D00EE3FD8 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FDB2F5C680D00EE3FD8 /* MapViewModel.swift */; };
+		9DAA8FDE2F5DD2B700EE3FD8 /* ListOfLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FDD2F5DD2B700EE3FD8 /* ListOfLocations.swift */; };
+		9DAA8FE02F5F2E0300EE3FD8 /* LocationPrewiewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FDF2F5F2E0300EE3FD8 /* LocationPrewiewView.swift */; };
+		9DAA8FE22F5F3D7200EE3FD8 /* LocationDetailedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FE12F5F3D7200EE3FD8 /* LocationDetailedInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +120,11 @@
 		9DAA8FCC2F5864DE00EE3FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DAA8FD42F5866C100EE3FD8 /* WidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetAttributes.swift; sourceTree = "<group>"; };
 		9DAA8FD72F58FED000EE3FD8 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
+		9DAA8FD92F5C669800EE3FD8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9DAA8FDB2F5C680D00EE3FD8 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		9DAA8FDD2F5DD2B700EE3FD8 /* ListOfLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfLocations.swift; sourceTree = "<group>"; };
+		9DAA8FDF2F5F2E0300EE3FD8 /* LocationPrewiewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPrewiewView.swift; sourceTree = "<group>"; };
+		9DAA8FE12F5F3D7200EE3FD8 /* LocationDetailedInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailedInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +221,10 @@
 				9DAA8FAD2F48916D00EE3FD8 /* DetailedPortView.swift */,
 				9DAA8FB32F49C5B300EE3FD8 /* PlusVoyageView.swift */,
 				9DAA8FB72F4CB98E00EE3FD8 /* DetailedShipView.swift */,
+				9DAA8FD92F5C669800EE3FD8 /* MapView.swift */,
+				9DAA8FDD2F5DD2B700EE3FD8 /* ListOfLocations.swift */,
+				9DAA8FDF2F5F2E0300EE3FD8 /* LocationPrewiewView.swift */,
+				9DAA8FE12F5F3D7200EE3FD8 /* LocationDetailedInfo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +237,7 @@
 				9DAA8FAF2F48928700EE3FD8 /* PortsViewModel.swift */,
 				9DAA8FB12F492EFD00EE3FD8 /* ShipsViewModel.swift */,
 				9DAA8FB52F4A763C00EE3FD8 /* VoyageViewModel.swift */,
+				9DAA8FDB2F5C680D00EE3FD8 /* MapViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -359,6 +374,7 @@
 				9DAA8F882F44B85D00EE3FD8 /* loginViewModel.swift in Sources */,
 				9DAA8FA62F47933800EE3FD8 /* DetailedVoyageView.swift in Sources */,
 				9DAA8FA02F47533700EE3FD8 /* StatisticsModel.swift in Sources */,
+				9DAA8FDA2F5C669800EE3FD8 /* MapView.swift in Sources */,
 				9DAA8F982F44D85C00EE3FD8 /* ShipmentModel.swift in Sources */,
 				9DAA8F962F44D84000EE3FD8 /* RouteModel.swift in Sources */,
 				9DAA8F572F30CF7D00EE3FD8 /* ContentView.swift in Sources */,
@@ -370,15 +386,19 @@
 				9DAA8F942F44D83100EE3FD8 /* DirectionModel.swift in Sources */,
 				9DAA8F552F30CF7D00EE3FD8 /* DotPort2_0App.swift in Sources */,
 				9DAA8FD82F58FED000EE3FD8 /* ActivityManager.swift in Sources */,
+				9DAA8FE22F5F3D7200EE3FD8 /* LocationDetailedInfo.swift in Sources */,
 				9DAA8F902F44D81000EE3FD8 /* VoyageModel.swift in Sources */,
+				9DAA8FDC2F5C680D00EE3FD8 /* MapViewModel.swift in Sources */,
 				9DAA8F8C2F44D7A900EE3FD8 /* ShipModel.swift in Sources */,
 				9DAA8F9C2F44E37500EE3FD8 /* MainView.swift in Sources */,
 				9DAA8FA82F47964F00EE3FD8 /* PortsView.swift in Sources */,
 				9DAA8FB02F48928700EE3FD8 /* PortsViewModel.swift in Sources */,
 				9DAA8F922F44D82100EE3FD8 /* WorkerModel.swift in Sources */,
 				9DAA8FAA2F47966000EE3FD8 /* ShipsView.swift in Sources */,
+				9DAA8FDE2F5DD2B700EE3FD8 /* ListOfLocations.swift in Sources */,
 				9DAA8FAC2F47967000EE3FD8 /* ProfileView.swift in Sources */,
 				9DAA8F9E2F47197D00EE3FD8 /* mainViewModel.swift in Sources */,
+				9DAA8FE02F5F2E0300EE3FD8 /* LocationPrewiewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

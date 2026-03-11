@@ -36,6 +36,7 @@ struct ShipModel: Identifiable {
     var name: String
     var capacity_weight: Float
     var capacity_containers: Int
+    var currentLoad: Int
     var status: StatusChoose
     var portId: /*PortModel*/ String
     var currentPortId: /*PortModel*/ String

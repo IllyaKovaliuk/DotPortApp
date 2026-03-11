@@ -70,7 +70,7 @@ class ActivityManager: ObservableObject {
         Task {
             await activity.end(
                 .init(state: finalState, staleDate: nil),
-                dismissalPolicy: .after(.now.addingTimeInterval(5)) 
+                dismissalPolicy: .after(.now.addingTimeInterval(5))
             )
             
             DispatchQueue.main.async {

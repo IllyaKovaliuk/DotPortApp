@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 enum BurthStatus: String {
     case opened = "Open"
@@ -14,7 +15,7 @@ enum BurthStatus: String {
 }
 
 
-struct PortModel: Identifiable {
+struct PortModel: Identifiable, Equatable {
     var id: String
     var name: String
     var country: String
@@ -27,6 +28,11 @@ struct PortModel: Identifiable {
     var burthStatus: BurthStatus
     var shipsCount: Int
     var burthCount: Int
+    var description: String?
+    
+    var coordinate: CLLocationCoordinate2D {
+            CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+        }
     
 }
 

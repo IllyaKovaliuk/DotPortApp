@@ -18,12 +18,12 @@ class MainVM: ObservableObject {
     
     
     var activeVoyagesCount: String {
-        let count = voyages.filter {$0.status == Status.In_progress}.count
+        let count = voyages.filter {$0.status == VoyageStatus.InProgress}.count
         return "\(count)"
     }
     
     var queueShips: String {
-        let countQueuedShips = voyages.filter {$0.status == Status.Queued}.count
+        let countQueuedShips = voyages.filter {$0.status == VoyageStatus.Queued}.count
         return "\(countQueuedShips)"
     }
     

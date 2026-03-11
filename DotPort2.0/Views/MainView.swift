@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainView: View {
     @State var todaysDate = Date.now
@@ -56,7 +57,7 @@ struct MainView: View {
                             .padding(.bottom, 10)
                         
                         ForEach(viewModel.voyages) { voyage in
-                            NavigationLink(destination: DetailedVoyageView()) {
+                            NavigationLink(destination: DetailedVoyageView(voyage: voyage, region: MKCoordinateRegion())) {
                                 OperationCell(
                                     title: voyage.title,
                                     subTitle: voyage.routeId,
@@ -79,12 +80,11 @@ struct MainView: View {
                 .padding(.bottom, 10)
             
         }
-                Button("Test Island") {
-        
-                    activityManager.startLiveActivity(for: VoyageViewModel().voyage_data[0])
-                }
+//                Button("Test Island") {
+//                    activityManager.startLiveActivity(for: VoyageViewModel().voyage_data[0])
+//                }
          }
-    }
+}
     
     struct StatisticCell: View {
         let title: String
@@ -173,7 +173,7 @@ struct MainView: View {
     struct OperationCell: View {
         let title: String
         let subTitle: String
-        let status: Status
+        let status: VoyageStatus
         let timeShip: String
         @State var isFav: Bool = false
         let voyage: VoyageModel
@@ -187,7 +187,7 @@ struct MainView: View {
                 }
                 
                 HStack {
-                    Text(voyage.status.rawValue)
+                    Text("\(voyage.status)")
                     Spacer()
                     //                        Text("ETA: \(voyage. ?? "--")")
                 }
@@ -220,9 +220,10 @@ struct MainView: View {
                 //                .disabled(closedBoard == 0)
                 ButtonCell(navigationDestination: PortsView(), customIcon: "door.sliding.right.hand.open")
                 ButtonCell( navigationDestination: ShipsView() , customIcon: "ferry.fill")
-                ButtonCell( navigationDestination: ProfileView(),
-                            customIcon: "person.fill")
-                ButtonCell(navigationDestination: PlusVoyageView(), customIcon: "plus") // онлі для воркер акаунта
+                ButtonCell(navigationDestination: MapView(), customIcon: "map.fill")
+                ButtonCell( navigationDestination: ProfileView(), customIcon: "person.fill")
+                ButtonCell(navigationDestination: PlusVoyageView(), customIcon: "plus")
+                // онлі для воркер акаунта
                 
                 
             }

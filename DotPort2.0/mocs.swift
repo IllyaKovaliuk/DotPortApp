@@ -25,7 +25,7 @@ struct Mocks {
     static let direction = DirectionModel(id: 001, name: "Alania-Odessa", created_at: Date())
     
     static let port1 = PortModel(
-        id: "001", name: "Odessa", country: "Ukraine", code: "Od-01", latitude: 46.30 , longtitude: 30.44, created_at: Date(), updated_at: Date(), burthStatus: .closed, shipsCount: 12, burthCount: 11
+        id: "001", name: "Odessa", country: "Ukraine", code: "Od-01", latitude: 46.490711, longtitude: 30.746087, created_at: Date(), updated_at: Date(), burthStatus: .closed, shipsCount: 12, burthCount: 11, description: "The Port of Odesa or Odesa Commercial Seaport (Ukrainian: Одеський морський торговельний порт, romanized: Odeskyi morskyi torhovelnyi port), located near Odesa, is the largest Ukrainian seaport and one of the largest ports in the Black Sea basin, with a total annual traffic capacity of 40 million tonnes"
     )
     
     static let port2 = PortModel(
@@ -57,7 +57,10 @@ struct Mocks {
     static let port9 = PortModel(
         id: "009", name: "Spain", country: "Spain", code: "Sp-01", latitude: 41.35, longtitude: 2.17, created_at: Date(), updated_at: Date(), burthStatus: .opened, shipsCount: 10, burthCount: 10
     )
-
+    
+    static let port10 = PortModel(id: "010", name: "Havalimani" , country: "Turkey", code: "Tu-02", latitude: 41.311878, longtitude: 28.782525, created_at: Date(), updated_at: Date(), burthStatus: .opened, shipsCount: 20, burthCount: 10)
+    
+// 41.311878, 28.782525
     static let route = RouteModel(
         fromPortId: port2,
         toPortId: port1,
@@ -65,11 +68,11 @@ struct Mocks {
         directionId: direction
     )
     
-    static let ship1 = ShipModel(id: "505", name: "Ever Given", capacity_weight: 10000, capacity_containers: 100, status: .Shipped, portId: "001", currentPortId: "001", engineType: .diesel,  shipType: .Neopanamax, imageName: "file:///Users/illyakovaliuk/Downloads/boat1.jpg" )
+    static let ship1 = ShipModel(id: "505", name: "Ever Given", capacity_weight: 10000, capacity_containers: 100, currentLoad: 3, status: .Shipped, portId: "001", currentPortId: "001", engineType: .diesel,  shipType: .Neopanamax, imageName: "file:///Users/illyakovaliuk/Downloads/boat1.jpg" )
     
-    static let ship2 = ShipModel(id: "606", name: "Natural Bro", capacity_weight: 25000, capacity_containers: 100, status: .Shipped, portId: "001", currentPortId: "001", engineType: .electric ,  shipType: .Feeder, imageName: "https://i.pinimg.com/736x/92/c7/65/92c7650cef4219e8d5d3e7f8d5708350.jpg")
+    static let ship2 = ShipModel(id: "606", name: "Natural Bro", capacity_weight: 25000, capacity_containers: 100, currentLoad: 5, status: .Shipped, portId: "001", currentPortId: "001", engineType: .electric ,  shipType: .Feeder, imageName: "https://i.pinimg.com/736x/92/c7/65/92c7650cef4219e8d5d3e7f8d5708350.jpg")
     
-    static let ship3 = ShipModel(id: "707", name: "Funny Advisor", capacity_weight: 25000, capacity_containers: 50, status: .Shipped, portId: "001", currentPortId: "001", engineType: .nuclear,  shipType: .UltraLargeContainerVessels, imageName: "https://i.pinimg.com/736x/46/42/49/4642496649a3df2b854b1723ae8c744b.jpg")
+    static let ship3 = ShipModel(id: "707", name: "Funny Advisor", capacity_weight: 25000, capacity_containers: 50, currentLoad: 15, status: .Shipped, portId: "001", currentPortId: "001", engineType: .nuclear,  shipType: .UltraLargeContainerVessels, imageName: "https://i.pinimg.com/736x/46/42/49/4642496649a3df2b854b1723ae8c744b.jpg")
     
 //    static let voyage1 = VoyageModel(id: "001", title: "MSC Gülsün", status: .In_progress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", createdAt: Date(), updatedAt: Date(), userId: "001", routeId: "001", shipId: "505", workerId: "001")
 //    

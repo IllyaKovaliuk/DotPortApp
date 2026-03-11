@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct PortsView: View {
+    @Environment (\.dismiss) var dismiss
     @StateObject private var vm = PortsViewModel()
     var body: some View {
+        //        ZStack(alignment: .topLeading){
         ScrollView{
             ForEach(vm.ports_data){ port in
                 NavigationLink(destination: DetailedPortView(port: port)){
@@ -51,13 +53,7 @@ struct PortsView: View {
                         .foregroundColor(.white)
                     }
                 }
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//                .padding()
-//                .background(Color(red: 43/255, green: 50/255, blue: 63/255))
-//                .foregroundColor(.white)
-//                .cornerRadius(12)
-//                .padding(10)
-//                .shadow(radius: 5)
+                
                 .fontDesign(.monospaced)
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -71,12 +67,30 @@ struct PortsView: View {
                 .navigationTitle("Ports")
             }
             
+//            .ignoresSafeArea()
+//            .navigationBarBackButtonHidden(false)
+//            .navigationBarHidden(true)
+            
             Spacer()
-
+            
         }
+        
+        //            Button {
+        //                dismiss()
+        //            } label: {
+        //                Image(systemName: "chevron.left.circle.fill")
+        //                    .font(.system(size: 40))
+        //                    .foregroundStyle(.white, .blue.opacity(0.8))
+        //            }
+        //            .padding(.leading, 20)
+        //            .padding(.top, 50)
+        //        }
+        //        .navigationBarHidden(true)
+        //    }
+        
     }
+    
 }
-
 #Preview {
     PortsView()
 }
