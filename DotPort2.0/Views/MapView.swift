@@ -26,24 +26,30 @@ struct MapView: View {
     var body: some View {
         ZStack {
             Map(position: $vm.cameraPosition)
-                VStack(spacing: 0) {
-                    header
-                        .padding()
-                    
-                    Spacer()
-                    
-                    ZStack{
-                        ForEach(vm.ports){port in
-                            if vm.mapLocation == port{
-                                LocationPrewiewView(location: port)
-                            }
+            
+            VStack(spacing: 0) {
+                header
+                    .padding()
+                
+                Spacer()
+                
+                ZStack{
+                    ForEach(vm.ports){port in
+//                        Marker(port.name, coordinate: port.coordinate)
+                        
+                        if vm.mapLocation == port{
+                            LocationPrewiewView(location: port)
                         }
                     }
                 }
             }
-        
         }
+        .sheet(item: $vm.showSheet, onDismiss: nil) { sheet in
+            LocationDetailedInfo(location: sheet)
+        }
+        
     }
+}
 
 
 #Preview {

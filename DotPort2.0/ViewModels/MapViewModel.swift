@@ -54,6 +54,8 @@ class MapViewModel: ObservableObject{
 
     //список локацій
     @Published var showLocationList: Bool = false
+    // show sheet
+    @Published var showSheet: PortModel? = nil
     
     //список локацій
     func toggleList(){

@@ -49,69 +49,6 @@ struct VoyageModel: Identifiable, Hashable {
 
 
 extension VoyageModel {
-//    static let mockVoyage = VoyageModel(
-//        id: UUID().uuidString,
-//        title: "North Atlantic Route",
-//        status: Status.Queued,
-//        departureDate: Date(),
-//        arrivalDate: Date().addingTimeInterval(86400 * 7), // +7 днів
-//        progressPercent: 45,
-//        createdBy: "admin_01",
-//        createdAt: Date(),
-//        updatedAt: Date(),
-//        userId: "user_123",
-//        routeId: "route_456",
-//        shipId: "ship_789",
-//        workerId: "worker_101"
-//    )
-//    
-//    static let mockVoyage2 = VoyageModel(
-//        id: UUID().uuidString,
-//        title: "North Atlantic Route",
-//        status: Status.Queued,
-//        departureDate: Date(),
-//        arrivalDate: Date().addingTimeInterval(86400 * 7), // +7 днів
-//        progressPercent: 80,
-//        createdBy: "admin_01",
-//        createdAt: Date(),
-//        updatedAt: Date(),
-//        userId: "user_123",
-//        routeId: "route_456",
-//        shipId: "ship_789",
-//        workerId: "worker_101"
-//    )
-//    
-//    static let mockVoyage3 = VoyageModel(
-//        id: UUID().uuidString,
-//        title: "North Atlantic Route",
-//        status: Status.Shipped,
-//        departureDate: Date(),
-//        arrivalDate: Date().addingTimeInterval(86400 * 7), // +7 днів
-//        progressPercent: 78,
-//        createdBy: "admin_01",
-//        createdAt: Date(),
-//        updatedAt: Date(),
-//        userId: "user_123",
-//        routeId: "route_456",
-//        shipId: "ship_789",
-//        workerId: "worker_101"
-//    )
-//    
-//    static let mockVoyage4 = VoyageModel(
-//        id: UUID().uuidString,
-//        title: "South Atlantic Route",
-//        status: Status.Queued,
-//        departureDate: Date(),
-//        arrivalDate: Date().addingTimeInterval(86400 * 7), // +7 днів
-//        progressPercent: 45,
-//        createdBy: "admin_01",
-//        createdAt: Date(),
-//        updatedAt: Date(),
-//        userId: "user_123",
-//        routeId: "route_213",
-//        shipId: "ship_789",
-//        workerId: "worker_101"
-//    )
     
     static let voyage1 = VoyageModel(id: "001", title: "MSC Gülsün", status: .InProgress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", createdAt: Date(), updatedAt: Date(), userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 10, fromPort: "001", toPort: "002")
     

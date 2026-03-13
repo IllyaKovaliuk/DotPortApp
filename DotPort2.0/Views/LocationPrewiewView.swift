@@ -49,7 +49,7 @@ extension LocationPrewiewView{
     
     private var ButtonCellLearnMore: some View{
         Button {
-            
+            vm.showSheet = location
         } label: {
             Text("Read more")
                 .font(.headline)

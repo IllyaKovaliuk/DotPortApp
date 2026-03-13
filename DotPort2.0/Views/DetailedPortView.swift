@@ -12,7 +12,10 @@ struct DetailedPortView: View {
     let port: PortModel
     @StateObject private var vm = PortsViewModel()
     @StateObject private var voyageVm = VoyageViewModel()
-    @State private var region: MKCoordinateRegion
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 50.45, longitude: 30.52),
+        span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+    )
     
     init(port: PortModel){
         self.port = port
@@ -25,8 +28,8 @@ struct DetailedPortView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 20){
-                Map(coordinateRegion: $region, annotationItems: [port]){ item in
-                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longtitude), tint:.blue)
+                Map(coordinateRegion: $region, annotationItems: [port]) { item in
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longtitude), tint: .blue)
                 }
                 .frame(height: 300)
                 .cornerRadius(20.0)

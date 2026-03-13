@@ -169,6 +169,7 @@
 		9DAA8F532F30CF7D00EE3FD8 /* DotPort2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA8FE32F61BBB700EE3FD8 /* NetworkLayer */,
 				9DAA8F862F44B84900EE3FD8 /* ViewModels */,
 				9DAA8F632F30CFA600EE3FD8 /* Views */,
 				9DAA8F622F30CF9C00EE3FD8 /* Models */,
@@ -261,6 +262,13 @@
 				9DAA8FCC2F5864DE00EE3FD8 /* Info.plist */,
 			);
 			path = VoyageInfoLive;
+			sourceTree = "<group>";
+		};
+		9DAA8FE32F61BBB700EE3FD8 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

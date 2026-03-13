@@ -17,13 +17,24 @@ struct ListOfLocations: View {
                     vm.showLocation(location: port)
                 }
                 label :{
-                    VStack(alignment: .leading){
-                        Text(port.name)
-                            .font(.headline)
-                        Text(port.country)
-                            .font(.subheadline)
+                    ZStack {
+                        VStack(alignment: .leading){
+                            Text(port.name)
+                                .font(.headline)
+                            Text(port.country)
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Spacer()
+                        HStack{
+                            Spacer()
+                            Text("\(port.burthCount)")
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
                 }
                 .padding(.vertical, 4)
                 .listRowBackground(Color.clear)
