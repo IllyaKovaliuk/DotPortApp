@@ -9,15 +9,15 @@ import Foundation
 import MapKit
 
 class VoyageViewModel: ObservableObject {
-    @Published var voyages: [VoyageModel] = []
-    @Published var voyage_data: [VoyageModel] = [VoyageModel.voyage1 , VoyageModel.voyage2, VoyageModel.voyage3]
-    @Published var voyage: VoyageModel = VoyageModel.voyage1
+    @Published var voyages: [Voyage] = []
+    @Published var voyage_data: [Voyage] = [Voyage.voyage1 , Voyage.voyage2, Voyage.voyage3]
+    @Published var voyage: Voyage = Voyage.voyage1
     
     init(){
         
     }
     
-    func statusValidate(voyage: VoyageModel, nextStatus: VoyageStatus){
+    func statusValidate(voyage: Voyage, nextStatus: VoyageStatus){
         if nextStatus > voyage.status {
             print("200 Ok")
         } else {

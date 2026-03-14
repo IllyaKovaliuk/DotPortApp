@@ -12,7 +12,7 @@ enum Tab{
 }
 
 class MainVM: ObservableObject {
-    @Published var voyages: [VoyageModel] = [VoyageModel.voyage1, VoyageModel.voyage2, VoyageModel.voyage3]
+    @Published var voyages: [Voyage] = [Voyage.voyage1, Voyage.voyage2, Voyage.voyage3]
     @Published var ports: [PortModel] = [Mocks.port1, Mocks.port2]
     @Published var currentPage: Tab = .dashboard
     
