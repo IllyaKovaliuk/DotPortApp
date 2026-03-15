@@ -80,6 +80,7 @@ struct Mocks {
 //    static let voyage2 = VoyageModel(id: "002", title: "MSC Kovaliuk", status: .In_progress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", createdAt: Date(), updatedAt: Date(), userId: "001", routeId: "001", shipId: "505", workerId: "001")
 //    
 //    static let voyage3 = VoyageModel(id: "003", title: "MSC Sander", status: .In_progress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", createdAt: Date(), updatedAt: Date(), userId: "001", routeId: "001", shipId: "505", workerId: "001")
+    
 }
 
 

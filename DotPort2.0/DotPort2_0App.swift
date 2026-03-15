@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct DotPort2_0App: App {
@@ -17,5 +18,6 @@ struct DotPort2_0App: App {
                 .environmentObject(activityManager)
 //                .environmentObject(vm)
         }
+        .modelContainer(for: Voyage.self)
     }
 }

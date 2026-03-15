@@ -7,11 +7,13 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 struct DetailedPortView: View {
     let port: PortModel
     @StateObject private var vm = PortsViewModel()
     @StateObject private var voyageVm = VoyageViewModel()
+    @Query var voyages: [Voyage]
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 50.45, longitude: 30.52),
         span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
@@ -19,6 +21,11 @@ struct DetailedPortView: View {
     
     init(port: PortModel){
         self.port = port
+        
+        let portId = port.id
+                _voyages = Query(filter: #Predicate<Voyage> { voyage in
+                    voyage.portId == portId
+                })
         
         _region = State(initialValue: MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: port.latitude , longitude: port.longtitude), span: MKCoordinateSpan(latitudeDelta: 1.5, longitudeDelta: 1.5)
@@ -78,7 +85,7 @@ struct DetailedPortView: View {
                 .padding()
             }
             LazyVStack {
-                ForEach(voyageVm.voyage_data.filter { $0.portId == port.id }) { voyage in
+                ForEach(voyages) { voyage in
                     VStack(alignment: .leading) {
                         Text(voyage.title).font(.headline)
                         Text("Voyage ID: \(voyage.id)").font(.caption)

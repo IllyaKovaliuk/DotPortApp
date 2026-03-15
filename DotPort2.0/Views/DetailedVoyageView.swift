@@ -7,10 +7,11 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 struct DetailedVoyageView: View {
     @StateObject var viewModel = VoyageViewModel()
-    let voyage: VoyageModel
+    let voyage: Voyage
     @State var region: MKCoordinateRegion
     @StateObject var portViewModel = PortsViewModel()
 
@@ -76,8 +77,28 @@ struct ProgressBar: View {
 }
 
 #Preview {
-    DetailedVoyageView(voyage: VoyageViewModel().voyage_data[0],
-                       region: MKCoordinateRegion())
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: Voyage.self, configurations: config)
+        
+        // Заповни всі необхідні параметри
+        let sample = Voyage(
+            title: "MSC Gülsün",
+            status: .InProgress,
+            departureDate: Date(),
+            arrivalDate: Date(),
+            createdBy: "Admin",
+            userId: "1",
+            routeId: "1",
+            shipId: "1",
+            workerId: "1",
+            portId: "1",
+            containerCounts: 10,
+            fromPort: "Rotterdam",
+            toPort: "Singapore"
+        )
+        
+        return DetailedVoyageView(voyage: sample, region: MKCoordinateRegion())
+            .modelContainer(container)
 }
 
 //port: PortsViewModel().ports_data[1]

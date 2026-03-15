@@ -15,16 +15,18 @@ import SwiftData
 //    case Queued = "Queued"
 //}
 
-enum VoyageStatus: Int, Comparable, CaseIterable {
-    static func < (lhs: VoyageStatus, rhs: VoyageStatus) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-    
-    case Queued = 0
-    case InProgress = 1
-    case Shipped = 2
-    case Done = 3
-}
+//enum VoyageStatus2: Int, Comparable, CaseIterable {
+//    static func < (lhs: VoyageStatus2, rhs: VoyageStatus2) -> Bool {
+//        return lhs.rawValue < rhs.rawValue
+//    }
+//    
+//    case Queued = 0
+//    case InProgress = 1
+//    case Shipped = 2
+//    case Done = 3
+//}
+
+
 
 struct VoyageModel: Identifiable, Hashable {
     let id: String
@@ -59,21 +61,22 @@ struct VoyageModel: Identifiable, Hashable {
 //}
 
 
-//enum VoyageStatus: Int, Codable, Comparable, CaseIterable {
-//    case Queued = 0
-//    case InProgress = 1
-//    case Shipped = 2
-//    case Done = 3
-//    
-//    var title: String {
-//        switch self {
-//        case .Queued:     return "Queued"
-//        case .InProgress: return "In Progress"
-//        case .Shipped:    return "Shipped"
-//        case .Done:       return "Done"
-//        }
-//    }
-//}
+enum VoyageStatus: Int, Codable, CaseIterable {
+    case Queued = 0
+    case InProgress = 1
+    case Shipped = 2
+    case Done = 3
+    
+    var title: String {
+        switch self {
+        case .Queued:     return "Queued"
+        case .InProgress: return "In Progress"
+        case .Shipped:    return "Shipped"
+        case .Done:       return "Done"
+        }
+    }
+}
+
 
 
 @Model
@@ -187,9 +190,4 @@ extension Voyage {
         )
     }
     
-    static let voyage1 = Voyage(id: "001", title: "MSC Gülsün", status: .InProgress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 10, fromPort: "001", toPort: "002")
-    
-    static let voyage2 = Voyage(id: "002", title: "MSC Kovaliuk", status: .Shipped, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 30, fromPort: "001", toPort: "002")
-    
-    static let voyage3 = Voyage(id: "003", title: "MSC Sander", status: .Queued, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "003", containerCounts: 100, fromPort: "003", toPort: "004")
 }

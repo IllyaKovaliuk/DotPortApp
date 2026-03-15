@@ -7,23 +7,29 @@
 
 import Foundation
 import MapKit
+import SwiftData
 
 class VoyageViewModel: ObservableObject {
     @Published var voyages: [Voyage] = []
-    @Published var voyage_data: [Voyage] = [Voyage.voyage1 , Voyage.voyage2, Voyage.voyage3]
-    @Published var voyage: Voyage = Voyage.voyage1
+//    @Published var voyage_data: [Voyage] = [Voyage.voyage1 , Voyage.voyage2, Voyage.voyage3]
+//    @Published var voyage: Voyage = Voyage.voyage1
     
     init(){
         
     }
     
-    func statusValidate(voyage: Voyage, nextStatus: VoyageStatus){
-        if nextStatus > voyage.status {
-            print("200 Ok")
-        } else {
-            print("404 Bad")
+//    func statusValidate(voyage: Voyage, nextStatus: VoyageStatus){
+//        if nextStatus > voyage.status {
+//            print("200 Ok")
+//        } else {
+//            print("404 Bad")
+//        }
+//    }
+    
+    func fetchVoyages(context: ModelContext) {
+            let descriptor = FetchDescriptor<Voyage>()
+            self.voyages = (try? context.fetch(descriptor)) ?? []
         }
-    }
     
     func takeLong(port: PortModel) -> CLLocationDegrees{
         let longtitude = port.longtitude
@@ -40,12 +46,24 @@ class VoyageViewModel: ObservableObject {
 //        
 //
 //    }
-    var progress : Double {
-        let allCases = VoyageStatus.allCases
-        guard let index = allCases.firstIndex(of: voyage.status) else {
-            return 0
-        }
-        return Double(index + 1) / Double(allCases.count)
+//    var progress : Double {
+//        let allCases = VoyageStatus.allCases
+//        guard let index = allCases.firstIndex(of: voyage.status) else {
+//            return 0
+//        }
+//        return Double(index + 1) / Double(allCases.count)
+//    }
+    
+    
+    func addSampleData(context: ModelContext) {
+        let voyage1 = Voyage(id: "001", title: "MSC Gülsün", status: .InProgress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 10, fromPort: "001", toPort: "002")
+        
+        let voyage2 = Voyage(id: "002", title: "MSC Kovaliuk", status: .Shipped, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 30, fromPort: "001", toPort: "002")
+        
+        let voyage3 = Voyage(id: "003", title: "MSC Sander", status: .Queued, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "003", containerCounts: 100, fromPort: "003", toPort: "004")
+        context.insert(voyage1)
+        context.insert(voyage2)
+        context.insert(voyage3)
     }
     
 }

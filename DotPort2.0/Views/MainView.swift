@@ -61,8 +61,8 @@ struct MainView: View {
                                 OperationCell(
                                     title: voyage.title,
                                     subTitle: voyage.routeId,
-                                    status: voyage.status,
-                                    timeShip: "ETA: 2h 15m", voyage: voyage
+                                    status: voyage.status, voyage: voyage
+//                                    timeShip: "ETA: 2h 15m", voyage: voyage
                                 )
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -174,9 +174,9 @@ struct MainView: View {
         let title: String
         let subTitle: String
         let status: VoyageStatus
-        let timeShip: String
+//        let timeShip: String
         @State var isFav: Bool = false
-        let voyage: VoyageModel
+        let voyage: Voyage
         var body: some View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
