@@ -25,5 +25,5 @@ struct ShipmentModel {
     var contactInfo: String
     var tracingCode: String
     var created_at: Date
-    var voyageId: VoyageModel
+    var voyageId: Voyage
 }

@@ -1,40 +1,37 @@
-//
-//  ListOfLocations.swift
-//  DotPort2.0
-//
-//  Created by Illya Kovaliuk on 08.03.2026.
-//
-
 import SwiftUI
 
 struct ListOfLocations: View {
     @StateObject private var vm = MapViewModel.shared
     
     var body: some View {
-        List{
-            ForEach(vm.ports){port in
+        List {
+            // Використовуємо ForEach всередині List — це стандарт для SwiftUI
+            ForEach(vm.ports) { port in
                 Button {
                     vm.showLocation(location: port)
-                }
-                label :{
-                    ZStack {
-                        VStack(alignment: .leading){
+                } label: {
+                    // Використовуємо HStack замість ZStack для горизонтального розміщення
+                    HStack(alignment: .center) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text(port.name)
                                 .font(.headline)
+                                .foregroundColor(.primary)
+                            
                             Text(port.country)
                                 .font(.subheadline)
-                            Spacer()
+                                .foregroundColor(.secondary)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Spacer()
-                        HStack{
-                            Spacer()
-                            Text("\(port.burthCount)")
-                        }
+                        Spacer() // Штовхає текст нижче вправо
+                        
+                        // Переконайся, що в моделі саме berthCount (через e)
+                        // Якщо все ж таки залишив burthCount — заміни тут назад на u
+                        Text("\(port.berthCount)")
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.blue)
                     }
-                    
-                    
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle()) // Щоб весь рядок був клікабельним
                 }
                 .padding(.vertical, 4)
                 .listRowBackground(Color.clear)
@@ -45,5 +42,7 @@ struct ListOfLocations: View {
 }
 
 #Preview {
+    // Додаємо контейнер, якщо твоя в'юшка залежить від SwiftData,
+    // або просто валідуємо інтерфейс
     ListOfLocations()
 }

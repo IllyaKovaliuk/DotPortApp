@@ -35,7 +35,7 @@ struct LocationDetailedInfo: View {
                     Text("How many burthes in port now -")
                         .font(.subheadline)
                         
-                    Text("\(location.burthCount)")
+                    Text("\(location.berthCount)")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

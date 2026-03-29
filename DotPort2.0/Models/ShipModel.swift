@@ -7,20 +7,20 @@
 
 import Foundation
 
-enum StatusChoose: String {
+enum StatusChoose: String, Codable {
     case In_progress = "In progress"
     case Shipped = "Shipped"
     case Not_started = "Not started"
 }
 
-enum EngineType: String {
+enum EngineType: String, Codable {
     case diesel = "diesel"
     case gasTurbine = "Gas turbine"
     case electric = "electric"
     case nuclear = "nuclear turbine"
 }
 
-enum ShipType: String {
+enum ShipType: String, Codable {
     case UltraLargeContainerVessels = "Ultra Large Container Vessels (ULCV)" //Місткість: 14,500 – 24,000+ контейнерів (TEU).
     case Neopanamax = "Neopanamax(Standart)" //Місткість: 10,000 – 14,500 TEU.
     case PostPanamax = "Post-Panamax" //Місткість: 5,000 – 10,000 TEU.
@@ -31,7 +31,7 @@ enum ShipType: String {
 
 
 
-struct ShipModel: Identifiable {
+struct ShipModel: Identifiable, Codable{
     var id : String
     var name: String
     var capacity_weight: Float

@@ -48,7 +48,7 @@ struct DetailedPortView: View {
                             .font(.largeTitle).bold()
                         Spacer()
                         
-                        Text(port.burthStatus.rawValue)
+                        Text(port.berthStatus.rawValue)
                         
                     }
                     Text(port.country)

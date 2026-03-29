@@ -38,7 +38,7 @@ class MainVM: ObservableObject {
     }
     
     var berthAvailability: String {
-        let countOpenBurth = ports.filter { $0.burthStatus == BurthStatus.opened}.count
+        let countOpenBurth = ports.filter { $0.berthStatus == BerthStatus.opened}.count
         return "\(countOpenBurth)"
     }
     

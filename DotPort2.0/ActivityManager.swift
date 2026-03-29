@@ -4,7 +4,7 @@ import ActivityKit
 class ActivityManager: ObservableObject {
     @Published var currentActivity: Activity<WidgetAttributes>?
     
-    func startLiveActivity(for voyage: VoyageModel) {
+    func startLiveActivity(for voyage: Voyage) {
         let attributes = WidgetAttributes(
             voyageId: voyage.id,
             userId: "User_777",

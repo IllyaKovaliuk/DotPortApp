@@ -29,20 +29,20 @@ struct PortsView: View {
                         HStack{
                             VStack{
                                 Text("Total Berth")
-                                Text("\(port.burthCount)")
+                                Text("\(port.berthCount)")
                             }
                             
                             .padding(2)
                             Spacer()
                             VStack{
                                 Text("Available")
-                                Text("\(port.burthCount)")
+                                Text("\(port.berthCount)")
                                     .foregroundColor(.green)
                             }
                             Spacer()
                             VStack{
                                 Text("In queue")
-                                Text("\(port.burthCount)")
+                                Text("\(port.berthCount)")
                                     .foregroundColor(.red)
                             }
                             

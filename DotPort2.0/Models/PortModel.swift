@@ -7,15 +7,16 @@
 
 import Foundation
 import MapKit
+import SwiftData
 
-enum BurthStatus: String {
+enum BerthStatus: String, Codable{
     case opened = "Open"
     case closed = "Closed"
     case NotAvailableNow = "NotAvailableNow"
 }
 
 
-struct PortModel: Identifiable, Equatable {
+struct PortModel: Identifiable, Equatable, Codable {
     var id: String
     var name: String
     var country: String
@@ -23,16 +24,19 @@ struct PortModel: Identifiable, Equatable {
     var latitude: Double
     var longtitude: Double
     var isActive: Bool = false
-    var created_at: Date
-    var updated_at: Date
-    var burthStatus: BurthStatus
+    var createdAt: Date
+    var updatedAt: Date
+    var berthStatus: BerthStatus
     var shipsCount: Int
-    var burthCount: Int
+    var berthCount: Int
     var description: String?
+    
     
     var coordinate: CLLocationCoordinate2D {
             CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
         }
+    
+    
     
 }
 
