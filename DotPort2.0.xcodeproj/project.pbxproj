@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		9D856A0D2F6D9CD5001EDC5D /* PlusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A0C2F6D9CD5001EDC5D /* PlusViewModel.swift */; };
 		9D856A832F75CF31001EDC5D /* VoyageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A822F75CF31001EDC5D /* VoyageService.swift */; };
-		9D856A852F76BCFE001EDC5D /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A842F76BCFD001EDC5D /* testing.swift */; };
 		9D856A872F76BD2D001EDC5D /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A862F76BD2D001EDC5D /* TestingView.swift */; };
 		9D856A8B2F76F3B5001EDC5D /* PortService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8A2F76F3B5001EDC5D /* PortService.swift */; };
 		9D856A8D2F795254001EDC5D /* ShipService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8C2F795254001EDC5D /* ShipService.swift */; };
+		9D856A8F2F7997C2001EDC5D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8E2F7997C2001EDC5D /* UserService.swift */; };
 		9DAA8F552F30CF7D00EE3FD8 /* DotPort2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F542F30CF7D00EE3FD8 /* DotPort2_0App.swift */; };
 		9DAA8F572F30CF7D00EE3FD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F562F30CF7D00EE3FD8 /* ContentView.swift */; };
 		9DAA8F592F30CF7F00EE3FD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA8F582F30CF7F00EE3FD8 /* Assets.xcassets */; };
@@ -87,10 +87,10 @@
 /* Begin PBXFileReference section */
 		9D856A0C2F6D9CD5001EDC5D /* PlusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewModel.swift; sourceTree = "<group>"; };
 		9D856A822F75CF31001EDC5D /* VoyageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoyageService.swift; sourceTree = "<group>"; };
-		9D856A842F76BCFD001EDC5D /* testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testing.swift; sourceTree = "<group>"; };
 		9D856A862F76BD2D001EDC5D /* TestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
 		9D856A8A2F76F3B5001EDC5D /* PortService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortService.swift; sourceTree = "<group>"; };
 		9D856A8C2F795254001EDC5D /* ShipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipService.swift; sourceTree = "<group>"; };
+		9D856A8E2F7997C2001EDC5D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		9DAA8F512F30CF7D00EE3FD8 /* DotPort2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotPort2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DAA8F542F30CF7D00EE3FD8 /* DotPort2_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotPort2_0App.swift; sourceTree = "<group>"; };
 		9DAA8F562F30CF7D00EE3FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -282,10 +282,10 @@
 			isa = PBXGroup;
 			children = (
 				9D856A822F75CF31001EDC5D /* VoyageService.swift */,
-				9D856A842F76BCFD001EDC5D /* testing.swift */,
 				9D856A862F76BD2D001EDC5D /* TestingView.swift */,
 				9D856A8A2F76F3B5001EDC5D /* PortService.swift */,
 				9D856A8C2F795254001EDC5D /* ShipService.swift */,
+				9D856A8E2F7997C2001EDC5D /* UserService.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -412,6 +412,7 @@
 				9DAA8FA02F47533700EE3FD8 /* StatisticsModel.swift in Sources */,
 				9D856A0D2F6D9CD5001EDC5D /* PlusViewModel.swift in Sources */,
 				9DAA8FDA2F5C669800EE3FD8 /* MapView.swift in Sources */,
+				9D856A8F2F7997C2001EDC5D /* UserService.swift in Sources */,
 				9DAA8F982F44D85C00EE3FD8 /* ShipmentModel.swift in Sources */,
 				9DAA8F962F44D84000EE3FD8 /* RouteModel.swift in Sources */,
 				9DAA8F572F30CF7D00EE3FD8 /* ContentView.swift in Sources */,
@@ -420,7 +421,6 @@
 				9DAA8F672F36A85D00EE3FD8 /* mainPageView.swift in Sources */,
 				9DAA8FB42F49C5B300EE3FD8 /* PlusVoyageView.swift in Sources */,
 				9DAA8F9A2F44D86C00EE3FD8 /* UserModel.swift in Sources */,
-				9D856A852F76BCFE001EDC5D /* testing.swift in Sources */,
 				9DAA8F942F44D83100EE3FD8 /* DirectionModel.swift in Sources */,
 				9DAA8F552F30CF7D00EE3FD8 /* DotPort2_0App.swift in Sources */,
 				9DAA8FD82F58FED000EE3FD8 /* ActivityManager.swift in Sources */,

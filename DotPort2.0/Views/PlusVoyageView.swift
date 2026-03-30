@@ -1,60 +1,85 @@
-//
-//  PlusVoyageView.swift
-//  DotPort2.0
-//
-//  Created by Illya Kovaliuk on 21.02.2026.
-//
-
 import SwiftUI
+import SwiftData
 
 struct PlusVoyageView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @State private var viewModel: PlusViewModel?
-    @State var groupPort: String = ""
-        // получається це вікно буде тільки для воркерів
-        // для воркера буде функція створити вояж також при переході на будь який вояж буде рядом кнопка або старт або стоп вояжа, що логічно воркер може зупини вояж по якійсь причині наприклад поломка, в інших випадках вояж має зупинитись сам після прибуття по координати тобто якшо координати корабля дорівнюють координатам вояжа стопається вояж. Як тоді відслідковувати де вояж де корабель. Інший простіший варіант дати заготовляний час для вояжа наприклад з одеси до пекіна пливти 40 годин по виходу часу вояж стопається
-        //
-        //
-        var body: some View {
-            Group {
-                if let viewModel {
-                    Form {
-                        Section("Voyage title"){
-                            TextField("Title", text: Binding(
-                                get: { viewModel.voyage.title },
-                                set: { viewModel.voyage.title = $0 }
-                            ))
-                        }
-                        Section("Departure Date"){
-                            DatePicker("Select Date", selection: Binding(
-                                get: { viewModel.voyage.createdAt },
-                                set: {viewModel.voyage.createdAt = $0}
-                            ), displayedComponents: .date)
-                            .datePickerStyle(.graphical)
-                        }
-                        Section("Arrival Date"){
-                            DatePicker("Select Date", selection: Binding(
-                                get: { viewModel.voyage.arrivalDate },
-                                set: {viewModel.voyage.arrivalDate = $0}
-                            ), displayedComponents: .date)
-                            .datePickerStyle(.graphical)
-                        }
+    @StateObject private var portVm = PortsViewModel()
+    @StateObject private var shipVm = ShipsViewModel()
 
-                        TextField("To port", text: Binding(
-                            get: { viewModel.voyage.toPort },
-                            set: { viewModel.voyage.toPort = $0 }
+    var body: some View {
+        Group {
+            if let viewModel {
+                Form {
+                    Section("Voyage title") {
+                        TextField("Title", text: Binding(
+                            get: { viewModel.title },
+                            set: { viewModel.title = $0 }
                         ))
                     }
-                } else {
-                    Text("Loading...")
-                        .onAppear {
-                            viewModel = PlusViewModel(context: modelContext)
+
+                    Section("Departure Date") {
+                        DatePicker("Select Date", selection: Binding(
+                            get: { viewModel.departureDate },
+                            set: { viewModel.departureDate = $0 }
+                        ), displayedComponents: .date)
+                        .datePickerStyle(.graphical)
+                    }
+
+                    Section("Arrival Date") {
+                        DatePicker("Select Date", selection: Binding(
+                            get: { viewModel.arrivalDate },
+                            set: { viewModel.arrivalDate = $0 }
+                        ), displayedComponents: .date)
+                        .datePickerStyle(.graphical)
+                    }
+
+                    Picker("From Port", selection: Binding(
+                        get: { viewModel.fromPort },
+                        set: { viewModel.fromPort = $0 }
+                    )) {
+                        ForEach(portVm.ports_data, id: \.id) { port in
+                            Text(port.name).tag(port.name)
                         }
+                    }
+
+                    Picker("To Port", selection: Binding(
+                        get: { viewModel.toPort },
+                        set: { viewModel.toPort = $0 }
+                    )) {
+                        ForEach(portVm.ports_data, id: \.id) { port in
+                            Text(port.name).tag(port.name)
+                        }
+                    }
+
+                    Section("Ship for your voyage") {
+                        Picker("Ships", selection: Binding(
+                            get: { viewModel.shipId },
+                            set: { viewModel.shipId = $0 }
+                        )) {
+                            ForEach(shipVm.ships_data, id: \.id) { ship in
+                                Text(ship.name).tag(ship.name)
+                            }
+                        }
+                    }
+
+                    Button("Confirm Voyage") {
+                        viewModel.createVoyage()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
+            } else {
+                ProgressView("Loading...")
+                    .onAppear {
+                        viewModel = PlusViewModel(context: modelContext)
+                    }
             }
-            .navigationTitle("Add new voyage")
         }
+        .navigationTitle("Add new voyage")
     }
+}
+            
 
 
 #Preview {

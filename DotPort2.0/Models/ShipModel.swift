@@ -31,7 +31,7 @@ enum ShipType: String, Codable {
 
 
 
-struct ShipModel: Identifiable, Codable{
+struct ShipModel: Identifiable, Codable, Hashable{
     var id : String
     var name: String
     var capacity_weight: Float

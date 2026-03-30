@@ -14,7 +14,7 @@ enum Role: String, Codable{
     case Worker
 }
 
-struct UserModel: Identifiable {
+struct UserModel: Identifiable, Codable {
     var id: String
     
     var first_name: String

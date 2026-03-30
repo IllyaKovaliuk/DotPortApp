@@ -16,7 +16,7 @@ enum BerthStatus: String, Codable{
 }
 
 
-struct PortModel: Identifiable, Equatable, Codable {
+struct PortModel: Identifiable, Equatable, Codable, Hashable{
     var id: String
     var name: String
     var country: String
