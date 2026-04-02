@@ -69,11 +69,11 @@ struct Mocks {
         directionId: direction
     )
     
-    static let ship1 = ShipModel(id: "505", name: "Ever Given", capacity_weight: 10000, capacity_containers: 100, currentLoad: 3, status: .Shipped, portId: "001", currentPortId: "001", engineType: .diesel,  shipType: .Neopanamax, imageName: "file:///Users/illyakovaliuk/Downloads/boat1.jpg" )
-    
-    static let ship2 = ShipModel(id: "606", name: "Natural Bro", capacity_weight: 25000, capacity_containers: 100, currentLoad: 5, status: .Shipped, portId: "001", currentPortId: "001", engineType: .electric ,  shipType: .Feeder, imageName: "https://i.pinimg.com/736x/92/c7/65/92c7650cef4219e8d5d3e7f8d5708350.jpg")
-    
-    static let ship3 = ShipModel(id: "707", name: "Funny Advisor", capacity_weight: 25000, capacity_containers: 50, currentLoad: 15, status: .Shipped, portId: "001", currentPortId: "001", engineType: .nuclear,  shipType: .UltraLargeContainerVessels, imageName: "https://i.pinimg.com/736x/46/42/49/4642496649a3df2b854b1723ae8c744b.jpg")
+//    static let ship1 = ShipModel(id: UUID(), name: "Ever Given", capacityWeight: 10000, capacityContainers: 100, currentLoad: 3, status: .Shipped, portId: "001", currentPortId: "001", engineType: .diesel,  shipType: .Neopanamax, imageName: "file:///Users/illyakovaliuk/Downloads/boat1.jpg" )
+//    
+//    static let ship2 = ShipModel(id: UUID(), name: "Natural Bro", capacityWeight: 25000, capacityContainers: 100, currentLoad: 5, status: .Shipped, portId: "001", currentPortId: "001", engineType: .electric ,  shipType: .Feeder, imageName: "https://i.pinimg.com/736x/92/c7/65/92c7650cef4219e8d5d3e7f8d5708350.jpg")
+//    
+//    static let ship3 = ShipModel(id: UUID(), name: "Funny Advisor", capacityWeight: 25000, capacityContainers: 50, currentLoad: 15, status: .Shipped, portId: "001", currentPortId: "001", engineType: .nuclear,  shipType: .UltraLargeContainerVessels, imageName: "https://i.pinimg.com/736x/46/42/49/4642496649a3df2b854b1723ae8c744b.jpg")
     
 //    static let voyage1 = VoyageModel(id: "001", title: "MSC Gülsün", status: .In_progress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", createdAt: Date(), updatedAt: Date(), userId: "001", routeId: "001", shipId: "505", workerId: "001")
 //    

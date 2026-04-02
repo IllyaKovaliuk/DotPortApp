@@ -17,7 +17,7 @@ enum BerthStatus: String, Codable{
 
 
 struct PortModel: Identifiable, Equatable, Codable, Hashable{
-    var id: String
+    var id = UUID().uuidString
     var name: String
     var country: String
     var code: String

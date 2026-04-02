@@ -22,8 +22,8 @@ struct DetailedVoyageView: View {
                     VStack(alignment: .leading, spacing: 20){
                         Map(coordinateRegion: $region, annotationItems: [voyage]){ item in
                             MapMarker(coordinate: CLLocationCoordinate2D(
-                                latitude: viewModel.takeLat(port: portViewModel.ports_data[0]),
-                                      longitude: viewModel.takeLong(port: portViewModel.ports_data[0])), tint:.blue)
+                                latitude: viewModel.takeLat(port: portViewModel.ports.first!),
+                                longitude: viewModel.takeLong(port: portViewModel.ports.first!)), tint:.blue)
                         }
                         .frame(height: 300)
                         .cornerRadius(20.0)

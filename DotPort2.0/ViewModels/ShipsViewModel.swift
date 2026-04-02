@@ -11,8 +11,10 @@ import SwiftUI
 
 class ShipsViewModel: ObservableObject{
     @Published var ships: [ShipModel] = []
-    @Published var ships_data : [ShipModel] = [Mocks.ship1, Mocks.ship2, Mocks.ship3]
-    @Published var ship: ShipModel = Mocks.ship1
+    @Published var isLoading: Bool = false
+    @Published var isLoading2: Bool = false
+    @Published var ship: ShipModel? = nil
+    private var timer: Timer?
     
     init() {
         
@@ -20,7 +22,7 @@ class ShipsViewModel: ObservableObject{
     
     
     var countShips: Int {
-        let count = ships_data.count
+        let count = ships.count
         return count
     }
     
@@ -43,56 +45,89 @@ class ShipsViewModel: ObservableObject{
 //        }
 //        
 //    }
-    enum shipError: Error {
-        case invalidCountContainers
-        case invalidCapacity
-        case basicErrror
-    }
     
+//    func containersError(ship: ShipModel) throws {
+//        var maxContainers = self.ship.capacityContainers
+//        var currentLoad = self.ship.currentLoad
+//        
+//        guard currentLoad! < maxContainers! else {          //форс анврап можуть бути проблеми
+//            throw shipError.invalidCapacity
+//        }
+//        
+//        guard maxContainers! > 0 else{                      //форс анврап можуть бути проблеми
+//            throw shipError.invalidCountContainers
+//        }
+//    }
     
-    func containersError(ship: ShipModel) throws {
-        var maxContainers = self.ship.capacity_containers
-        var currentLoad = self.ship.currentLoad
+//    
+//    func addContainer(oneConatiner: Int){
+//        do {
+//            try containersError(ship: self.ship)
+//            self.ship.currentLoad? += oneConatiner
+//            print("Контейнер додано успішно!")
+//        } catch {
+//            print("Помилка: \(error)")        }
+//    }
+    
+    func fetchShips() async throws {
         
-        guard currentLoad < maxContainers else {
-            throw shipError.invalidCapacity
-        }
+        await MainActor.run { isLoading = true }
         
-        guard maxContainers > 0 else{
-            throw shipError.invalidCountContainers
-        }
-    }
-    
-    
-    func addContainer(oneConatiner: Int){
         do {
-            try containersError(ship: self.ship)
-            self.ship.currentLoad += oneConatiner
-            print("Контейнер додано успішно!")
+            let ships = try await FetchShips().getShips()
+            
+            await MainActor.run {
+                self.ships = ships
+                self.isLoading = false
+            }
+            
         } catch {
-            print("Помилка: \(error)")        }
+            print("Error of loading in shipsViewModel")
+            await MainActor.run { isLoading = false }
+        }
+        
+    }
+    
+    func timerFetch() {
+        Task { try await fetchShips() }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+            Task{ try await self.fetchShips()  }
+        }
+    }
+    
+    func stopAutoUpdate() {
+            timer?.invalidate()
+        }
+    
+    
+    func fetchShipId(id: String) async throws {
+        await MainActor.run { isLoading2 = true }
+        
+        do {
+            let ship = try await FetchShips().getShipId(shipId: id)
+            
+            await MainActor.run {
+                self.ship = ship
+                self.isLoading2 = false
+            }
+            
+        } catch {
+            print("Error of loading in shipsViewModel")
+            await MainActor.run { isLoading2 = false }
+        }
+    }
+    
+    func timerFetchId(id: String) {
+        Task {
+            try await fetchShipId(id: id)
+        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+            Task {
+                try await self.fetchShipId(id: id)
+            }
+        }
     }
     
 }
-
-
-//var activeVoyagesCount: String {
-//let count = voyages.filter {$0.status == Status.In_progress}.count
-//return "\(count)"
-//}
-
-
-//    func addContainers(ship: ShipModel, oneContainer: Int){
-//        let maxContainers = ship.capacity_containers
-//        var currentLoad = ship.currentLoad
-//        if maxContainers < 0{
-//            throw shipError.invalidCapacity
-//        }
-//
-//        if currentLoad < maxContainers {
-//            currentLoad += oneContainer
-//            print("We add your container")
-//        } else {
-//            print("Sorry we cant load container, to much containers")
-//        }
-//    }

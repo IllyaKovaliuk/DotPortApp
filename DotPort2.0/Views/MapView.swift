@@ -13,10 +13,11 @@ import MapKit
 struct MapView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var vm = MapViewModel.shared
+    @StateObject var portVm = PortsViewModel()
     private var mapRegion: MKCoordinateRegion {
-        let coordinate = vm.ports.isEmpty ?
+        let coordinate = portVm.ports.isEmpty ?
                          CLLocationCoordinate2D(latitude: 0, longitude: 0) :
-                         vm.ports[0].coordinate
+        portVm.ports[0].coordinate
         
         return MKCoordinateRegion(
             center: coordinate,
@@ -34,7 +35,7 @@ struct MapView: View {
                 Spacer()
                 
                 ZStack{
-                    ForEach(vm.ports){port in
+                    ForEach(portVm.ports){port in
 //                        Marker(port.name, coordinate: port.coordinate)
                         
                         if vm.mapLocation == port{
@@ -62,13 +63,13 @@ extension MapView {
     private var header: some View {
         VStack {
             Button(action: vm.toggleList) {
-                Text(vm.mapLocation.name + ", " + vm.mapLocation.country)
+                Text(vm.mapLocation!.name + ", " + vm.mapLocation!.country)
                     .font(.title2)
                     .fontWeight(.black)
                     .foregroundColor(.primary)
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-                    .animation(.none, value: vm.mapLocation)
+                    .animation(.none, value: vm.mapLocation!)
                     .onTapGesture {
                         vm.showLocationList.toggle()
                     }

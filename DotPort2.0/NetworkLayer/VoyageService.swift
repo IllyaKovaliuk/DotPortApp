@@ -42,13 +42,13 @@ actor GetVoyages{
         }
     }
         
-    func getVoyage(id: UUID){
+    func getVoyage(id: String){
         print(id)
     }
     
     func postVoyage(newVoyage: VoyageDTO) async throws {
         
-        let endpoint = "http://localhost:5678/webhook-test/3ee1aaa6-8392-44fa-a8d1-bdcbc3a74552"
+        let endpoint = "http://localhost:5678/webhook/3ee1aaa6-8392-44fa-a8d1-bdcbc3a74552"
         
         guard let url = URL(string: endpoint) else{
             throw NetErrorrs.InvalidUrl

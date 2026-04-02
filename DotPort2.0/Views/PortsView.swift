@@ -13,7 +13,7 @@ struct PortsView: View {
     var body: some View {
         //        ZStack(alignment: .topLeading){
         ScrollView{
-            ForEach(vm.ports_data){ port in
+            ForEach(vm.ports){ port in
                 NavigationLink(destination: DetailedPortView(port: port)){
                     VStack{
                         HStack{
@@ -74,20 +74,8 @@ struct PortsView: View {
             Spacer()
             
         }
-        
-        //            Button {
-        //                dismiss()
-        //            } label: {
-        //                Image(systemName: "chevron.left.circle.fill")
-        //                    .font(.system(size: 40))
-        //                    .foregroundStyle(.white, .blue.opacity(0.8))
-        //            }
-        //            .padding(.leading, 20)
-        //            .padding(.top, 50)
-        //        }
-        //        .navigationBarHidden(true)
-        //    }
-        
+        .onAppear{vm.timerFetch()}
+        .onDisappear{vm.stopAutoUpdate()}
     }
     
 }

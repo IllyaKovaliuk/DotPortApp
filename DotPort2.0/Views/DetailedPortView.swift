@@ -73,7 +73,7 @@ struct DetailedPortView: View {
                     }
                     Spacer()
                     VStack{
-                        Text("\(vm.availableShips)")
+//                        Text("\(vm.availableShips)")
                         Text("Available")
                     }
                     Spacer()
@@ -116,6 +116,6 @@ struct DetailedPortView: View {
 }
 
 
-#Preview {
-    DetailedPortView(port: PortsViewModel().ports_data[0])
-}
+//#Preview {
+//    DetailedPortView(port: PortsViewModel().ports.first!)
+//}

@@ -65,10 +65,6 @@ final class Voyage {
     var containerCounts: Int
     var fromPort: String
     var toPort: String
-
-    // Relationships (якщо будеш додавати пізніше)
-//    @Relationship(deleteRule: .cascade) var vessel: Vessel?
-//    @Relationship(deleteRule: .cascade) var rate: Rate?
     
             init(
                 id: String = UUID().uuidString,

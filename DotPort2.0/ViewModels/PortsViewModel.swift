@@ -11,26 +11,75 @@ import MapKit
 
 class PortsViewModel: ObservableObject{
     @Published var ports: [PortModel] = []
-    @Published var ports_data: [PortModel] = [Mocks.port1, Mocks.port2, Mocks.port3, Mocks.port4, Mocks.port5, Mocks.port6, Mocks.port7, Mocks.port8, Mocks.port9, Mocks.port10]
     @Published var ships: [ShipModel] = []
-    @Published var ships_data: [ShipModel] = [Mocks.ship1]
-    
-    var availableShips: Int {
-        var count = 0
-        for ship in ships_data{
-            if ship.status.rawValue == "Shipped"{
-                count += 1
-            }
-        }
-        return count
-    }
+    @Published var isLoading: Bool = false
+    @Published var port: PortModel? = nil
+    private var timer: Timer?
     
     func parseCoords(port: PortModel) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(
-                latitude: port.latitude,
-                longitude: port.longtitude
-            )
+            latitude: port.latitude,
+            longitude: port.longtitude
+        )
     }
     
+    func fetchPorts() async throws {
+        await MainActor.run{isLoading = true}
+        
+        do {
+            let ports = try await FetchPorts().getPorts()
+            
+            await MainActor.run {
+                self.ports = ports
+                self.isLoading = false
+                
+                if MapViewModel.shared.mapLocation == nil, let first = ports.first {
+                        MapViewModel.shared.setup(with: self)
+                    }
+            }
+        } catch {
+            print("Error of loading in portsViewModel")
+            await MainActor.run { isLoading = false }
+        }
+    }
     
+    func timerFetch() {
+        Task { try await fetchPorts() }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+            Task{ try await self.fetchPorts()  }
+        }
+    }
+    
+    func fetchPort(id: String) async throws {
+        await MainActor.run {isLoading = true}
+        
+        do{
+            let port = try await FetchPorts().getPort(portId: id)
+            
+            await MainActor.run {
+                self.port = port
+                self.isLoading = false
+        }}
+        catch {
+            print("Error of loading in shipsViewModel")
+            await MainActor.run { isLoading = false }
+        }
+    }
+    func stopAutoUpdate() {
+            timer?.invalidate()
+        }
+    
+    
+    func timerFetchId(id: String) {
+        Task {
+            try await fetchPort(id: id)
+        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+            Task {
+                try await self.fetchPort(id: id)
+            }
+        }
+    }
 }

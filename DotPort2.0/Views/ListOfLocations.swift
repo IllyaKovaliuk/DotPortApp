@@ -6,7 +6,7 @@ struct ListOfLocations: View {
     var body: some View {
         List {
             // Використовуємо ForEach всередині List — це стандарт для SwiftUI
-            ForEach(vm.ports) { port in
+            ForEach(vm.viewModelPorts.ports) { port in
                 Button {
                     vm.showLocation(location: port)
                 } label: {

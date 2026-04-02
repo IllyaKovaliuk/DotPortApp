@@ -7,7 +7,7 @@ struct ShipsView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("\(shipViewModel.countShips): ships found")
+                    Text("\(shipViewModel.countShips) ships found")
                         .padding(.horizontal)
                         .padding(.top)
                         .fontDesign(.monospaced)
@@ -18,8 +18,8 @@ struct ShipsView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
-                        ForEach(shipViewModel.ships_data) { ship in
-                            NavigationLink(destination: DetailedShipView(ship: ship)) {
+                        ForEach(shipViewModel.ships) { ship in
+                            NavigationLink(destination: DetailedShipView(shipId:ship.id)) {
                                 MyShipCard(ship: ship)
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -33,6 +33,8 @@ struct ShipsView: View {
             .background(Color(white: 0.95))
             .navigationTitle("List of ships")
         }
+        .onAppear{shipViewModel.timerFetch()}
+        .onDisappear{shipViewModel.stopAutoUpdate()}
     }
 }
 
@@ -42,7 +44,6 @@ struct MyShipCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Картинка (тут затуп чи просто імедж чи асінк імедж)
             AsyncImage(url: URL(string: ship.imageName ?? "Sorry")) { image in
                 image
                     .resizable()
@@ -62,28 +63,28 @@ struct MyShipCard: View {
                     Text(ship.name)
                         .fontWeight(.bold)
                     Spacer()
-                    Text("\(ship.status)")
-                        .font(.caption)
-                        .padding(4)
-                        .background(Color.green.opacity(0.2))
-                        .cornerRadius(4)
+//                    Text("\(ship.status?.rawValue)")
+//                        .font(.caption)
+//                        .padding(4)
+//                        .background(Color.green.opacity(0.2))
+//                        .cornerRadius(4)
                 }
                 
                 Text("ID: \(ship.id)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Capacity").font(.system(size: 10))
-                        Text("\(ship.capacity_weight)").fontWeight(.semibold)
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("Fuel").font(.system(size: 10))
-                        Text("Calculated...").fontWeight(.semibold)
-                    }
-                }
+//                HStack {
+//                    VStack(alignment: .leading) {
+//                        Text("Capacity").font(.system(size: 10))
+//                        Text("\(ship.capacityWeight)").fontWeight(.semibold)
+//                    }
+//                    Spacer()
+//                    VStack(alignment: .trailing) {
+//                        Text("Fuel").font(.system(size: 10))
+//                        Text("Calculated...").fontWeight(.semibold)
+//                    }
+//                }
             }
             .padding()
             .frame(width: 250)

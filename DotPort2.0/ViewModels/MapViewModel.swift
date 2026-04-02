@@ -11,23 +11,35 @@ import SwiftUI
 
 class MapViewModel: ObservableObject{
     static let shared = MapViewModel()
-    @Published var ports: [PortModel] = [Mocks.port1, Mocks.port2, Mocks.port3, Mocks.port4, Mocks.port5, Mocks.port6, Mocks.port7, Mocks.port8, Mocks.port9, Mocks.port10]
-    @Published var port: PortModel = Mocks.port1
-    @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
-    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-    @Published var cameraPosition: MapCameraPosition = .automatic
-    @Published var mapLocation: PortModel {
+        
+        // Повертаємо ініціалізацію, але БЕЗ @StateObject (це тільки для View)
+        var viewModelPorts = PortsViewModel()
+        
+        // Робимо мапЛокейшн опціональним, щоб не було крашу при старті
+        @Published var mapLocation: PortModel? {
             didSet {
-                updateMapRegion(location: mapLocation)
+                if let location = mapLocation {
+                    updateMapRegion(location: location)
+                }
             }
         }
 
+        @Published var cameraPosition: MapCameraPosition = .automatic
+        let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+
     init(){
-        let firstPort = [Mocks.port1, Mocks.port2, Mocks.port3, Mocks.port4, Mocks.port5, Mocks.port10][0]
-                self.mapLocation = firstPort
- 
-                self.updateMapRegion(location: firstPort)
+        
     }
+    
+    func setup(with portsVM: PortsViewModel) {
+            self.viewModelPorts = portsVM
+            
+            // Якщо порти вже є (наприклад, завантажились раніше)
+            if let first = portsVM.ports.first {
+                self.mapLocation = first
+                self.updateMapRegion(location: first)
+            }
+        }
     
     private func updateMapRegion(location: PortModel) {
         print("Перемикаю на: \(location.name), коорд: \(location.coordinate.latitude), \(location.coordinate.longitude)")
@@ -41,15 +53,15 @@ class MapViewModel: ObservableObject{
             }
         }
     
-    private func updateToFirstPort() {
-            if let firstPort = ports.first {
-                self.mapLocation = firstPort
-                self.mapRegion = MKCoordinateRegion(
-                    center: firstPort.coordinate,
-                    span: mapSpan
-                )
-            }
-        }
+//    private func updateToFirstPort() {
+//            if let firstPort = viewModelPorts?.ports.first {
+//                self.mapLocation = firstPort
+//                self.mapRegion = MKCoordinateRegion(
+//                    center: firstPort.coordinate,
+//                    span: mapSpan
+//                )
+//            }
+//        }
     
 
     //список локацій
@@ -88,19 +100,19 @@ class MapViewModel: ObservableObject{
     
     
     func nextButtonPressed(){
-        guard let currentIndex = ports.firstIndex (where: { $0 == mapLocation }) else {
+        guard let currentIndex = viewModelPorts.ports.firstIndex (where: { $0 == mapLocation }) else {
             print("Could not find current index in location array.")
             return
         }
         
         let nextIndex = currentIndex + 1
-        guard ports.indices.contains(nextIndex) else {
-            guard let firstLocation = ports.first else { return }
+        guard ((viewModelPorts.ports.indices.contains(nextIndex)) != nil) else {
+            guard let firstLocation = viewModelPorts.ports.first else { return }
             showLocation(location: firstLocation)
             return
         }
         
-        let nextLocation = ports[nextIndex]
+        let nextLocation = viewModelPorts.ports[nextIndex]
         showLocation(location: nextLocation)
         
     }
