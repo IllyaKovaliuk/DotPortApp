@@ -11,6 +11,7 @@ import MapKit
 struct MainView: View {
     @State var todaysDate = Date.now
     @StateObject private var viewModel = MainVM()
+    @StateObject var voyageViewModel = VoyageViewModel()
     @State private var selectedTab = 0
     let statColumns: [GridItem] = [
         GridItem(.flexible()),
@@ -57,13 +58,12 @@ struct MainView: View {
                             .padding(.bottom, 10)
                         
                         ForEach(viewModel.voyages) { voyage in
-                            NavigationLink(destination: DetailedVoyageView(voyage: voyage, region: MKCoordinateRegion())) {
+                            NavigationLink(destination: DetailedVoyageView(region: MKCoordinateRegion())) {
                                 OperationCell(
-                                    title: voyage.title,
-                                    subTitle: voyage.routeId,
-                                    status: voyage.status, voyage: voyage
 //                                    timeShip: "ETA: 2h 15m", voyage: voyage
                                 )
+                                .onAppear{ voyageViewModel.timerFetching() }
+                                .onDisappear{ voyageViewModel.stopTimer() }
                             }
                             .buttonStyle(PlainButtonStyle())
                             .padding(.bottom, 10)
@@ -171,27 +171,30 @@ struct MainView: View {
     }
     
     struct OperationCell: View {
-        let title: String
-        let subTitle: String
-        let status: VoyageStatus
+//        let title: String
+//        let subTitle: String
+//        let status: VoyageStatus
 //        let timeShip: String
         @State var isFav: Bool = false
-        let voyage: Voyage
+//        let voyage: Voyage
+        @StateObject var viewModel = VoyageViewModel()
         var body: some View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text(voyage.title)
-                        .font(.headline)
-                    Spacer()
-                    heartEmodji
-                }
-                
-                HStack {
-                    Text("\(voyage.status)")
-                    Spacer()
-                    //                        Text("ETA: \(voyage. ?? "--")")
+                    ForEach(viewModel.voyages){ voyage in
+                        Text(voyage.title)
+                            .font(.headline)
+                        Spacer()
+                        heartEmodji
+                        HStack {
+                            Text("\(voyage.status)")
+                            Spacer()
+                        }
+                    }
                 }
             }
+            .onAppear{ viewModel.timerFetching() }
+            .onDisappear{ viewModel.stopTimer() }
             .padding()
             .background(Color(red: 43/255, green: 50/255, blue: 63/255))
             .foregroundColor(.white)

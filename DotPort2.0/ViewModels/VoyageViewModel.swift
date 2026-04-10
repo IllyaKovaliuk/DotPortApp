@@ -11,8 +11,8 @@ import SwiftData
 
 class VoyageViewModel: ObservableObject {
     @Published var voyages: [Voyage] = []
-//    @Published var voyage_data: [Voyage] = [Voyage.voyage1 , Voyage.voyage2, Voyage.voyage3]
-//    @Published var voyage: Voyage = Voyage.voyage1
+    @Published var isLoading: Bool = false
+    private var timer: Timer?
     
     init(){
         
@@ -26,10 +26,38 @@ class VoyageViewModel: ObservableObject {
 //        }
 //    }
     
-    func fetchVoyages(context: ModelContext) {
-            let descriptor = FetchDescriptor<Voyage>()
-            self.voyages = (try? context.fetch(descriptor)) ?? []
+//    func fetchVoyages(context: ModelContext) {
+//            let descriptor = FetchDescriptor<Voyage>()
+//            self.voyages = (try? context.fetch(descriptor)) ?? []
+//        }
+//    
+    func fetchVoyages() async throws {
+        await MainActor.run{ isLoading = true }
+        
+        do {
+            let voyages = try await GetVoyages().getVoyages()
+            
+            await MainActor.run {
+                self.voyages = voyages
+                self.isLoading = false
+            }
+        } catch {
+            print("Error of loading in shipsViewModel")
+            await MainActor.run { isLoading = false }
         }
+    }
+    
+    func timerFetching() {
+        Task{try await fetchVoyages()}
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+            Task{ try await self.fetchVoyages()  }
+        }
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+    }
     
     func takeLong(port: PortModel) -> CLLocationDegrees{
         let longtitude = port.longtitude
@@ -55,15 +83,15 @@ class VoyageViewModel: ObservableObject {
 //    }
     
     
-    func addSampleData(context: ModelContext) {
-        let voyage1 = Voyage(id: "001", title: "MSC Gülsün", status: .InProgress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 10, fromPort: "001", toPort: "002")
-        
-        let voyage2 = Voyage(id: "002", title: "MSC Kovaliuk", status: .Shipped, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 30, fromPort: "001", toPort: "002")
-        
-        let voyage3 = Voyage(id: "003", title: "MSC Sander", status: .Queued, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "003", containerCounts: 100, fromPort: "003", toPort: "004")
-        context.insert(voyage1)
-        context.insert(voyage2)
-        context.insert(voyage3)
-    }
+//    func addSampleData(context: ModelContext) {
+//        let voyage1 = Voyage(id: "001", title: "MSC Gülsün", status: .InProgress, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy:"Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 10, fromPort: "001", toPort: "002")
+//        
+//        let voyage2 = Voyage(id: "002", title: "MSC Kovaliuk", status: .Shipped, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "001", containerCounts: 30, fromPort: "001", toPort: "002")
+//        
+//        let voyage3 = Voyage(id: "003", title: "MSC Sander", status: .Queued, departureDate: Date(), arrivalDate: Date(), progressPercent: 65, createdBy: "Illya Kovaliuk", /*createdAt: Date(), updatedAt: Date(),*/ userId: "001", routeId: "001", shipId: "505", workerId: "001", portId: "003", containerCounts: 100, fromPort: "003", toPort: "004")
+//        context.insert(voyage1)
+//        context.insert(voyage2)
+//        context.insert(voyage3)
+//    }
     
 }

@@ -11,7 +11,7 @@ import SwiftData
 
 struct DetailedVoyageView: View {
     @StateObject var viewModel = VoyageViewModel()
-    let voyage: Voyage
+//    let voyage: Voyage
     @State var region: MKCoordinateRegion
     @StateObject var portViewModel = PortsViewModel()
 
@@ -20,7 +20,7 @@ struct DetailedVoyageView: View {
             ZStack{
                 ScrollView{
                     VStack(alignment: .leading, spacing: 20){
-                        Map(coordinateRegion: $region, annotationItems: [voyage]){ item in
+                        Map(coordinateRegion: $region, annotationItems: [viewModel.voyages.first!]){ item in
                             MapMarker(coordinate: CLLocationCoordinate2D(
                                 latitude: viewModel.takeLat(port: portViewModel.ports.first!),
                                 longitude: viewModel.takeLong(port: portViewModel.ports.first!)), tint:.blue)
@@ -31,11 +31,11 @@ struct DetailedVoyageView: View {
                         
                         VStack(alignment: .leading) {
                             HStack{
-                                Text(voyage.title)
+                                Text(viewModel.voyages.first!.title)
                                     .font(.largeTitle).bold()
                                 Spacer()
                                 
-                                Text("\(voyage.status)")
+                                Text("\(viewModel.voyages.first!.status)")
                                 
                             }
                             
@@ -76,29 +76,29 @@ struct ProgressBar: View {
     }
 }
 
-#Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try! ModelContainer(for: Voyage.self, configurations: config)
-        
-        // Заповни всі необхідні параметри
-        let sample = Voyage(
-            title: "MSC Gülsün",
-            status: .InProgress,
-            departureDate: Date(),
-            arrivalDate: Date(),
-            createdBy: "Admin",
-            userId: "1",
-            routeId: "1",
-            shipId: "1",
-            workerId: "1",
-            portId: "1",
-            containerCounts: 10,
-            fromPort: "Rotterdam",
-            toPort: "Singapore"
-        )
-        
-        return DetailedVoyageView(voyage: sample, region: MKCoordinateRegion())
-            .modelContainer(container)
-}
+//#Preview {
+//    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try! ModelContainer(for: Voyage.self, configurations: config)
+//        
+//        // Заповни всі необхідні параметри
+//        let sample = Voyage(
+//            title: "MSC Gülsün",
+//            status: .InProgress,
+//            departureDate: Date(),
+//            arrivalDate: Date(),
+//            createdBy: "Admin",
+//            userId: "1",
+//            routeId: "1",
+//            shipId: "1",
+//            workerId: "1",
+//            portId: "1",
+//            containerCounts: 10,
+//            fromPort: "Rotterdam",
+//            toPort: "Singapore"
+//        )
+//        
+//        return DetailedVoyageView(voyage: sample, region: MKCoordinateRegion())
+//            .modelContainer(container)
+//}
 
 //port: PortsViewModel().ports_data[1]

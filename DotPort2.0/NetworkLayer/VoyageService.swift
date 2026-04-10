@@ -11,7 +11,7 @@ import Foundation
 actor GetVoyages{
     
     func getVoyages() async throws -> [Voyage] {
-        let endpoint = "http://localhost:5678/webhook-test/voyages"
+        let endpoint = "http://localhost:5678/webhook/voyages"
         
         guard let url = URL(string: endpoint) else {
             throw NetErrorrs.InvalidUrl
@@ -19,9 +19,9 @@ actor GetVoyages{
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-//        if let jsonString = String(data: data, encoding: .utf8) {
-//            print("RAW JSON FROM n8n: \(jsonString)")
-//        }
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("RAW JSON FROM n8n: \(jsonString)")
+        }
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw NetErrorrs.Not200Code
@@ -65,7 +65,7 @@ actor GetVoyages{
         
         request.httpBody = jsonData
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw NetErrorrs.BadData

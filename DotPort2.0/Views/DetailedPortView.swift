@@ -115,7 +115,3 @@ struct DetailedPortView: View {
     
 }
 
-
-//#Preview {
-//    DetailedPortView(port: PortsViewModel().ports.first!)
-//}

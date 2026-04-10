@@ -24,6 +24,8 @@ struct ListOfLocations: View {
                         
                         Spacer() // Штовхає текст нижче вправо
                         
+
+                        
                         // Переконайся, що в моделі саме berthCount (через e)
                         // Якщо все ж таки залишив burthCount — заміни тут назад на u
                         Text("\(port.berthCount)")
