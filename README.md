@@ -33,7 +33,7 @@ Offline Support: Intelligent caching using SwiftData for uninterrupted workflow 
 Fleet Analytics: Data-driven insights into logistics efficiency.
 
 🛠 Installation & Setup
-Clone the repo: git clone https://github.com/yourusername/DotPort.git
+Clone the repo: git clone https://github.com/IllyaKovaliuk/DotPortApp.git
 
 Environment: Requires Xcode 15.0+ and iOS 17.0+ (for SwiftData support).
 
