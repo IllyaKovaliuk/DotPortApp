@@ -6,7 +6,7 @@ struct PlusVoyageView: View {
 
     @StateObject private var portVm = PortsViewModel()
     @StateObject private var shipVm = ShipsViewModel()
-
+    
     @State private var title: String = ""
     @State private var departureDate: Date = Date()
     @State private var arrivalDate: Date = Date()
@@ -22,43 +22,73 @@ struct PlusVoyageView: View {
             }
 
             Section("Departure Date") {
-                DatePicker("Select Date", selection: $departureDate, displayedComponents: .date)
-                    .datePickerStyle(.graphical)
+                DatePicker("Select Date", selection: Binding(
+                    get: { departureDate },
+                    set: { departureDate = $0 }
+                ), displayedComponents: .date)
+                    .datePickerStyle(.compact)
             }
 
             Section("Arrival Date") {
-                DatePicker("Select Date", selection: $arrivalDate, displayedComponents: .date)
-                    .datePickerStyle(.graphical)
+                DatePicker("Select Date", selection: Binding(
+                    get: { arrivalDate },
+                    set: { arrivalDate = $0 }
+                ), displayedComponents: .date)
+                    .datePickerStyle(.compact)
             }
+            // We must take date from departure date and validate
 
-            Picker("From Port", selection: $fromPort) {
-                ForEach(portVm.ports, id: \.id) { port in
-                    Text(port.name).tag(port.name)
+            Section("Choose port"){
+                if portVm.ports.isEmpty {
+                    Text("No ports")
+                } else {
+                    Picker("From Port", selection: Binding(
+                        get: { portId },
+                        set: { portId = $0 }
+                    )) {
+                        ForEach(portVm.ports){ port in
+                            Text(port.name).tag(port.id)
+                        }
+                    }
+                    
+                    
                 }
             }
+            .onAppear{portVm.timerFetch()}
+            .onDisappear{ portVm.stopAutoUpdate() }
+
 //            Picker("From Port", selection: $portId) {
 //                ForEach(portVm.ports_data, id: \.id) { port in
 //                    Text(port.id).tag(port.id)
 //                }
 //            }
 
-            Picker("To Port", selection: $toPort) {
-                ForEach(portVm.ports, id: \.id) { port in
-                    Text(port.name).tag(port.name)
+            Section("Choose port"){
+                if portVm.ports.isEmpty {
+                    Text("No ports")
+                } else {
+                    Picker("To Port", selection: $toPort) {
+                        ForEach(portVm.ports){ port in
+                            Text(port.name).tag(port.name)
+                        }
+                    }
                 }
             }
-
-            Picker("Ships", selection: Binding(
-                get: { shipId },
-                set: { shipId = $0 }
-            )) {
-                ForEach(shipVm.ships) { ship in
-                    // Показуємо Юзеру - НАЗВУ (ship.name)
-                    // Відправляємо в базу - ID (ship.id)
-                    Text(ship.name).tag(ship.id)
+            
+            Section("Choose ship"){
+                Picker("Ships", selection: Binding(
+                    get: { shipId },
+                    set: { shipId = $0 }
+                )) {
+                    ForEach(shipVm.ships) { ship in
+                        // Показуємо Юзеру - НАЗВУ (ship.name)
+                        // Відправляємо в базу - ID (ship.id)
+                        Text(ship.name).tag(ship.id)
+                    }
                 }
             }
-
+            .onAppear{shipVm.timerFetch()}
+            
             
         }
         .navigationTitle("Add new voyage")
@@ -79,6 +109,10 @@ struct PlusVoyageView: View {
     }
 
     func setDefaultsIfNeeded() {
+        if portId.isEmpty, let firstPort = portVm.ports.first {
+            portId = firstPort.id
+        }
+        
         if fromPort.isEmpty, let firstPort = portVm.ports.first {
             fromPort = firstPort.name
         }
@@ -88,13 +122,23 @@ struct PlusVoyageView: View {
         }
 
         if shipId.isEmpty, let firstShip = shipVm.ships.first {
-            shipId = firstShip.name
+            shipId = firstShip.id
         }
     }
 
     func createVoyage() {
         let voyageActor = GetVoyages()
 
+        
+        print("--- DEBUG VOYAGE DATA ---")
+        print("Title: \(title)")
+        print("Ship ID: \(shipId)")
+        print("From: \(fromPort)")
+        print("To: \(toPort)")
+        print("Port ID: \(portId)") // Перевір, чи він не пустий!
+        print("-------------------------")
+        
+        
         let newVoyage = VoyageDTO(
             id: UUID().uuidString,
             title: title,

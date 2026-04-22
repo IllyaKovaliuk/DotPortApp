@@ -21,12 +21,6 @@ enum EngineType: String, Codable, Hashable {
 }
 
 enum ShipType: String, Codable, Hashable {
-//    case UltraLargeContainerVessels = "UltraLargeContainerVessels(ULCV)" //Місткість: 14,500 – 24,000+ контейнерів (TEU).
-//    case Neopanamax = "Neopanamax(Standart)" //Місткість: 10,000 – 14,500 TEU.
-//    case PostPanamax = "Post-Panamax" //Місткість: 5,000 – 10,000 TEU.
-//    case Feeder = "Feeder" //Місткість: 1,000 – 3,000 TEU.
-//    case Barges = "Barges" //Місткість: До 1,000 TEU (часто 100-300).
-    
         case ultraLarge = "UltraLargeContainerVessels"
         case neopanamax = "Neopanamax"
         case postPanamax = "PostPanamax"

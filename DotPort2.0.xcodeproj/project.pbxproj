@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		9D856A8B2F76F3B5001EDC5D /* PortService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8A2F76F3B5001EDC5D /* PortService.swift */; };
 		9D856A8D2F795254001EDC5D /* ShipService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8C2F795254001EDC5D /* ShipService.swift */; };
 		9D856A8F2F7997C2001EDC5D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A8E2F7997C2001EDC5D /* UserService.swift */; };
+		9D8712022F89859C007BD6BC /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8712012F89859C007BD6BC /* GraphService.swift */; };
 		9DAA8F552F30CF7D00EE3FD8 /* DotPort2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F542F30CF7D00EE3FD8 /* DotPort2_0App.swift */; };
 		9DAA8F572F30CF7D00EE3FD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F562F30CF7D00EE3FD8 /* ContentView.swift */; };
 		9DAA8F592F30CF7F00EE3FD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA8F582F30CF7F00EE3FD8 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		9D856A8A2F76F3B5001EDC5D /* PortService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortService.swift; sourceTree = "<group>"; };
 		9D856A8C2F795254001EDC5D /* ShipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipService.swift; sourceTree = "<group>"; };
 		9D856A8E2F7997C2001EDC5D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		9D8712012F89859C007BD6BC /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		9DAA8F512F30CF7D00EE3FD8 /* DotPort2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotPort2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DAA8F542F30CF7D00EE3FD8 /* DotPort2_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotPort2_0App.swift; sourceTree = "<group>"; };
 		9DAA8F562F30CF7D00EE3FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				9DAA8FA12F477E1100EE3FD8 /* mocs.swift */,
 				9DAA8FD42F5866C100EE3FD8 /* WidgetAttributes.swift */,
 				9DAA8FD72F58FED000EE3FD8 /* ActivityManager.swift */,
+				9D8712012F89859C007BD6BC /* GraphService.swift */,
 			);
 			path = DotPort2.0;
 			sourceTree = "<group>";
@@ -363,6 +366,9 @@
 				Base,
 			);
 			mainGroup = 9DAA8F482F30CF7D00EE3FD8;
+			packageReferences = (
+				9D8712032F8AA3CC007BD6BC /* XCLocalSwiftPackageReference "../../../SwiftAdvanced/LinkedListPackage" */,
+			);
 			productRefGroup = 9DAA8F522F30CF7D00EE3FD8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +442,7 @@
 				9DAA8F922F44D82100EE3FD8 /* WorkerModel.swift in Sources */,
 				9DAA8FAA2F47966000EE3FD8 /* ShipsView.swift in Sources */,
 				9DAA8FDE2F5DD2B700EE3FD8 /* ListOfLocations.swift in Sources */,
+				9D8712022F89859C007BD6BC /* GraphService.swift in Sources */,
 				9DAA8FAC2F47967000EE3FD8 /* ProfileView.swift in Sources */,
 				9DAA8F9E2F47197D00EE3FD8 /* mainViewModel.swift in Sources */,
 				9DAA8FE02F5F2E0300EE3FD8 /* LocationPrewiewView.swift in Sources */,
@@ -730,6 +737,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9D8712032F8AA3CC007BD6BC /* XCLocalSwiftPackageReference "../../../SwiftAdvanced/LinkedListPackage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../SwiftAdvanced/LinkedListPackage;
+		};
+/* End XCLocalSwiftPackageReference section */
 	};
 	rootObject = 9DAA8F492F30CF7D00EE3FD8 /* Project object */;
 }

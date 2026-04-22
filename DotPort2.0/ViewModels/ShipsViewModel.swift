@@ -92,7 +92,7 @@ class ShipsViewModel: ObservableObject{
         Task { try await fetchShips() }
         
         timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
-            Task{ try await self.fetchShips()  }
+            Task{ try await self.fetchShips() }
         }
     }
     

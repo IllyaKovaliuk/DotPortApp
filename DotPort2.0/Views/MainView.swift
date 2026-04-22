@@ -28,7 +28,7 @@ struct MainView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         
                         VStack(alignment: .leading){
-                            Text("Today's active operations: \(viewModel.voyages.count)")
+                            Text("Today's active operations: \(voyageViewModel.voyages.count)")
                                 .font(.headline)
                             Text(todaysDate, style: .date)
                                 .fontWeight(.light)
@@ -57,13 +57,13 @@ struct MainView: View {
                             .font(.title3).bold()
                             .padding(.bottom, 10)
                         
-                        ForEach(viewModel.voyages) { voyage in
+                        ForEach(voyageViewModel.voyages) { voyage in
                             NavigationLink(destination: DetailedVoyageView(region: MKCoordinateRegion())) {
-                                OperationCell(
+                                OperationCell(voyage: voyage)
 //                                    timeShip: "ETA: 2h 15m", voyage: voyage
-                                )
-                                .onAppear{ voyageViewModel.timerFetching() }
-                                .onDisappear{ voyageViewModel.stopTimer() }
+                                
+//                                .onAppear{ voyageViewModel.timerFetching() }
+//                                .onDisappear{ voyageViewModel.stopTimer() }
                             }
                             .buttonStyle(PlainButtonStyle())
                             .padding(.bottom, 10)
@@ -73,6 +73,11 @@ struct MainView: View {
                     .padding(25)
                     
                 }
+                .onAppear{ 
+                    print("MainView appeared")
+                    voyageViewModel.timerFetching()
+                }
+                .onDisappear{ voyageViewModel.stopTimer() }
                 
                 
             }
@@ -171,30 +176,20 @@ struct MainView: View {
     }
     
     struct OperationCell: View {
-//        let title: String
-//        let subTitle: String
-//        let status: VoyageStatus
-//        let timeShip: String
+
         @State var isFav: Bool = false
-//        let voyage: Voyage
-        @StateObject var viewModel = VoyageViewModel()
+        let voyage: Voyage
+//        @StateObject var viewModel = VoyageViewModel()
         var body: some View {
             VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    ForEach(viewModel.voyages){ voyage in
-                        Text(voyage.title)
-                            .font(.headline)
-                        Spacer()
-                        heartEmodji
                         HStack {
-                            Text("\(voyage.status)")
+                            Text(voyage.title)
+                                .font(.headline)
                             Spacer()
+                            heartEmodji
                         }
+                        Text("\(voyage.status)")
                     }
-                }
-            }
-            .onAppear{ viewModel.timerFetching() }
-            .onDisappear{ viewModel.stopTimer() }
             .padding()
             .background(Color(red: 43/255, green: 50/255, blue: 63/255))
             .foregroundColor(.white)

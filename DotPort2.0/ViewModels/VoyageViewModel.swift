@@ -41,8 +41,12 @@ class VoyageViewModel: ObservableObject {
                 self.voyages = voyages
                 self.isLoading = false
             }
+        }catch DecodingError.keyNotFound(let key, let context) {
+            print("❌ Помилка: ключ '\(key.stringValue)' не знайдений. Контекст: \(context.debugDescription)")
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("❌ Помилка: невідповідність типу \(type). Контекст: \(context.debugDescription)")
         } catch {
-            print("Error of loading in shipsViewModel")
+            print("❌ Інша помилка декодування: \(error)")
             await MainActor.run { isLoading = false }
         }
     }

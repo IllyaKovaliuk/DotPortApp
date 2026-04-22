@@ -61,6 +61,7 @@ actor GetVoyages{
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+        
         let jsonData = try encoder.encode(newVoyage)
         
         request.httpBody = jsonData

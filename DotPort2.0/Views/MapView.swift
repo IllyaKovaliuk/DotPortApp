@@ -26,7 +26,21 @@ struct MapView: View {
     }
     var body: some View {
         ZStack {
-            Map(position: $vm.cameraPosition)
+            Map(position: $vm.cameraPosition) {
+                
+                ForEach(portVm.ports) { port in
+                    Marker(port.name, coordinate: port.coordinate)
+                }
+                
+                // 🔥 ЛІНІЇ
+                ForEach(vm.connections, id: \.1.id) { (p1, p2) in
+                    MapPolyline(coordinates: [
+                        p1.coordinate,
+                        p2.coordinate
+                    ])
+                    .stroke(.blue, lineWidth: 2)
+                }
+            }
             
             VStack(spacing: 0) {
                 header

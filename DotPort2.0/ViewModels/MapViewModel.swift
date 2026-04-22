@@ -10,6 +10,7 @@ import MapKit
 import SwiftUI
 
 class MapViewModel: ObservableObject{
+    @Published var connections: [(PortModel, PortModel)] = []
     static let shared = MapViewModel()
         
         // Повертаємо ініціалізацію, але БЕЗ @StateObject (це тільки для View)
@@ -77,12 +78,27 @@ class MapViewModel: ObservableObject{
         }
     }
     
+//    func showLocation(location: PortModel){
+//        withAnimation(.easeInOut) {
+//            mapLocation = location
+//            showLocationList = false
+//        }
+//    }
+    
     func showLocation(location: PortModel){
         withAnimation(.easeInOut) {
             mapLocation = location
             showLocationList = false
+            
+            // 🔥 ГРАФ ЛОГІКА
+            let reachable = viewModelPorts.graph.reachablePorts(from: location)
+            
+            connections = reachable
+                .filter { $0.id != location.id }
+                .map { (location, $0) }
         }
     }
+    
     @Published var isReadMore: Bool = false
     
     func toggleReadMore(){

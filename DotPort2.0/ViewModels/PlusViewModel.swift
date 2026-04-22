@@ -53,8 +53,8 @@ class PlusViewModel: ObservableObject{
             createdBy: "MobileUser",
             createdAt: createdAt,
             updatedAt: updatedAt,
-            userId: nil,         // Ці поля ОБОВ'ЯЗКОВІ в ініціалізаторі,
-            routeId: nil,        // навіть якщо вони nil у структурі
+            userId: nil,
+            routeId: nil,
             shipId: shipId,
             workerId: nil,
             portId: nil,

@@ -15,6 +15,7 @@ class PortsViewModel: ObservableObject{
     @Published var isLoading: Bool = false
     @Published var port: PortModel? = nil
     private var timer: Timer?
+    let graph = GraphService()
     
     func parseCoords(port: PortModel) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(
@@ -24,7 +25,7 @@ class PortsViewModel: ObservableObject{
     }
     
     func fetchPorts() async throws {
-        await MainActor.run{isLoading = true}
+        await MainActor.run { isLoading = true }
         
         do {
             let ports = try await FetchPorts().getPorts()
@@ -33,13 +34,20 @@ class PortsViewModel: ObservableObject{
                 self.ports = ports
                 self.isLoading = false
                 
-                if MapViewModel.shared.mapLocation == nil, let first = ports.first {
-                        MapViewModel.shared.setup(with: self)
-                    }
+                self.graph.buildGraph(from: ports)
+                
+                if MapViewModel.shared.mapLocation == nil,
+                   let first = ports.first {
+                    MapViewModel.shared.setup(with: self)
+                }
             }
+            
         } catch {
             print("Error of loading in portsViewModel")
-            await MainActor.run { isLoading = false }
+            
+            await MainActor.run {
+                self.isLoading = false
+            }
         }
     }
     
