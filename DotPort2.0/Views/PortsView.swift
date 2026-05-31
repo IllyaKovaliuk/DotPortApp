@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PortsView: View {
-    @Environment (\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
     @StateObject private var vm = PortsViewModel()
     var body: some View {
         //        ZStack(alignment: .topLeading){

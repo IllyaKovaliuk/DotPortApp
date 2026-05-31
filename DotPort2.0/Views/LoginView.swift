@@ -135,16 +135,7 @@ struct RegisterView: View {
                     .padding(.top, 25)
                 }
                 
-                
-                Button{
-                }
-                    label:{
-                    Text("Sign in")
-                            .foregroundColor(.white)
-                            .hAlign(.center)
-                            .fillView(Color(red: 43/255, green: 50/255, blue: 63/255))
-                }
-                    .padding(.top, 10)
+                SignInButton()
             }
             
             HStack{
@@ -201,6 +192,31 @@ extension View{
                     .fill(color)
             }
         
+    }
+}
+
+struct SignInButton: View {
+    @StateObject var vm = loginVM()
+    var body: some View {
+        Button{
+            Task{
+                do{
+                    try await vm.userCheck()
+                } catch {
+                    print("Error")
+                }
+            }
+        }
+        
+            label:{
+            Text("Sign in")
+                    .foregroundColor(.white)
+                    .hAlign(.center)
+                    .fillView(Color(red: 43/255, green: 50/255, blue: 63/255))
+        }
+            .onAppear{vm.timerFetch()}
+            .onDisappear{vm.stopAutoUpdate()}
+            .padding(.top, 10)
     }
 }
 

@@ -23,4 +23,5 @@ struct UserModel: Identifiable, Codable {
     var password: String
     var role: Role
     var createdAt = Date()
+    var isRegistered: Bool = false
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D5FFA972FA8E00200DD98A6 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5FFA962FA8DFF700DD98A6 /* Authentication.swift */; };
+		9D5FFA992FA8ECBD00DD98A6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5FFA982FA8ECBD00DD98A6 /* File.swift */; };
+		9D5FFA9B2FA8F2B500DD98A6 /* authManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5FFA9A2FA8F2B000DD98A6 /* authManager.swift */; };
 		9D856A0D2F6D9CD5001EDC5D /* PlusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A0C2F6D9CD5001EDC5D /* PlusViewModel.swift */; };
 		9D856A832F75CF31001EDC5D /* VoyageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A822F75CF31001EDC5D /* VoyageService.swift */; };
 		9D856A872F76BD2D001EDC5D /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D856A862F76BD2D001EDC5D /* TestingView.swift */; };
@@ -86,6 +89,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D5FFA962FA8DFF700DD98A6 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		9D5FFA982FA8ECBD00DD98A6 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		9D5FFA9A2FA8F2B000DD98A6 /* authManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authManager.swift; sourceTree = "<group>"; };
 		9D856A0C2F6D9CD5001EDC5D /* PlusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewModel.swift; sourceTree = "<group>"; };
 		9D856A822F75CF31001EDC5D /* VoyageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoyageService.swift; sourceTree = "<group>"; };
 		9D856A862F76BD2D001EDC5D /* TestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
@@ -250,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				9DAA8F872F44B85D00EE3FD8 /* loginViewModel.swift */,
+				9D5FFA982FA8ECBD00DD98A6 /* File.swift */,
 				9DAA8F9D2F47197D00EE3FD8 /* mainViewModel.swift */,
 				9DAA8FAF2F48928700EE3FD8 /* PortsViewModel.swift */,
 				9DAA8FB12F492EFD00EE3FD8 /* ShipsViewModel.swift */,
@@ -284,6 +291,8 @@
 		9DAA8FE32F61BBB700EE3FD8 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9D5FFA9A2FA8F2B000DD98A6 /* authManager.swift */,
+				9D5FFA962FA8DFF700DD98A6 /* Authentication.swift */,
 				9D856A822F75CF31001EDC5D /* VoyageService.swift */,
 				9D856A862F76BD2D001EDC5D /* TestingView.swift */,
 				9D856A8A2F76F3B5001EDC5D /* PortService.swift */,
@@ -410,8 +419,10 @@
 				9DAA8FB62F4A763C00EE3FD8 /* VoyageViewModel.swift in Sources */,
 				9DAA8FA22F477E1200EE3FD8 /* mocs.swift in Sources */,
 				9DAA8FAE2F48916D00EE3FD8 /* DetailedPortView.swift in Sources */,
+				9D5FFA972FA8E00200DD98A6 /* Authentication.swift in Sources */,
 				9D856A872F76BD2D001EDC5D /* TestingView.swift in Sources */,
 				9DAA8FD52F5866C100EE3FD8 /* WidgetAttributes.swift in Sources */,
+				9D5FFA992FA8ECBD00DD98A6 /* File.swift in Sources */,
 				9DAA8F652F30CFBB00EE3FD8 /* LoginView.swift in Sources */,
 				9DAA8F882F44B85D00EE3FD8 /* loginViewModel.swift in Sources */,
 				9DAA8FA62F47933800EE3FD8 /* DetailedVoyageView.swift in Sources */,
@@ -446,6 +457,7 @@
 				9DAA8FAC2F47967000EE3FD8 /* ProfileView.swift in Sources */,
 				9DAA8F9E2F47197D00EE3FD8 /* mainViewModel.swift in Sources */,
 				9DAA8FE02F5F2E0300EE3FD8 /* LocationPrewiewView.swift in Sources */,
+				9D5FFA9B2FA8F2B500DD98A6 /* authManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

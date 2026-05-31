@@ -34,9 +34,10 @@ struct MainView: View {
                                 .fontWeight(.light)
                                 .foregroundStyle(.secondary)
                         }
-                        
-                        MainAccountWindow(modelWork: workerData)
-                            .padding(.top, 20)
+                        NavigationLink(destination: ProfileView()){
+                            MainAccountWindow(modelWork: workerData)
+                                .padding(.top, 20)
+                        }
                         
                         Text("Statistics")
                             .font(.title3).bold()
