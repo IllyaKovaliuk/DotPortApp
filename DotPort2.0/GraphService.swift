@@ -31,8 +31,8 @@ final class GraphService: ObservableObject {
     // MARK: - Distance
     
     private func calculateDistance(_ p1: PortModel, _ p2: PortModel) -> Double {
-        let loc1 = CLLocation(latitude: p1.latitude, longitude: p1.longtitude)
-        let loc2 = CLLocation(latitude: p2.latitude, longitude: p2.longtitude)
+        let loc1 = CLLocation(latitude: p1.validCoordinate.latitude, longitude: p1.validCoordinate.longitude)
+        let loc2 = CLLocation(latitude: p2.validCoordinate.latitude, longitude: p2.validCoordinate.longitude)
         
         return loc1.distance(from: loc2) / 1000 // km
     }

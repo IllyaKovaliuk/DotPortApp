@@ -12,17 +12,17 @@ import SwiftData
 struct DotPort2_0App: App {
     @StateObject private var activityManager = ActivityManager()
     @StateObject private var authManager = AuthManager()
-//    @StateObject private var vm = MapViewModel()
+
     var body: some Scene {
         WindowGroup {
-//            if authManager.isAuthenticated{
+            if authManager.isAuthenticated {
                 MainView()
                     .environmentObject(activityManager)
-                //                .environmentObject(vm)
-//            } else {
-//                LoginView()
-//                    .environmentObject(authManager)
-//            }
+                    .environmentObject(authManager)
+            } else {
+                LoginView()
+                    .environmentObject(authManager)
+            }
         }
         .modelContainer(for: Voyage.self)
     }

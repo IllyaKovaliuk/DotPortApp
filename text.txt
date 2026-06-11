@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body { background-color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.5; }
+    .keyword { color: #bb2cb9; font-weight: bold; } /* struct, private, var, let, func, class */
+    .attribute { color: #836c28; } /* @Environment, @StateObject, @State */
+    .type { color: #2e6974; } /* View, String, Date, Binding, PortsViewModel */
+    .string { color: #c41a16; } /* "Voyage title", "Title" */
+    .comment { color: #007400; font-style: italic; } /* // коментарі */
+    .number { color: #1c00cf; } /* 0, 20, 300 */
+    .call { color: #4a66a0; } /* Text, Form, Section, TextField */
+    .plain { color: #000000; }
+</style>
+</head>
+<body>
+<pre>
+<span class="keyword">struct</span> <span class="type">PlusVoyageView</span>: <span class="type">View</span> {
+    <span class="attribute">@Environment</span>(\.modelContext) <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">modelContext</span>
+
+    <span class="attribute">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">portVm</span> = <span class="call">PortsViewModel</span>()
+    <span class="attribute">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">shipVm</span> = <span class="call">ShipsViewModel</span>()
+    
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">title</span>: <span class="type">String</span> = <span class="string">""</span>
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">departureDate</span>: <span class="type">Date</span> = <span class="call">Date</span>()
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">arrivalDate</span>: <span class="type">Date</span> = <span class="call">Date</span>()
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">fromPort</span>: <span class="type">String</span> = <span class="string">""</span>
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">toPort</span>: <span class="type">String</span> = <span class="string">""</span>
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">shipId</span>: <span class="type">String</span> = <span class="string">""</span>
+    <span class="attribute">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> <span class="plain">portId</span>: <span class="type">String</span> = <span class="string">""</span>
+
+    <span class="keyword">var</span> <span class="plain">body</span>: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="call">Form</span> {
+            <span class="call">Section</span>(<span class="string">"Voyage title"</span>) {
+                <span class="call">TextField</span>(<span class="string">"Title"</span>, <span class="plain">text</span>: <span class="plain">$title</span>)
+            }
+
+            <span class="call">Section</span>(<span class="string">"Departure Date"</span>) {
+                <span class="call">DatePicker</span>(<span class="string">"Select Date"</span>, <span class="plain">selection</span>: <span class="call">Binding</span>(
+                    <span class="plain">get</span>: { <span class="plain">departureDate</span> },
+                    <span class="plain">set</span>: { <span class="plain">departureDate</span> = <span class="plain">$0</span> }
+                ), <span class="plain">displayedComponents</span>: .<span class="plain">date</span>)
+                    .<span class="call">datePickerStyle</span>(.<span class="plain">compact</span>)
+            }
+
+            <span class="call">Section</span>(<span class="string">"Arrival Date"</span>) {
+                <span class="call">DatePicker</span>(<span class="string">"Select Date"</span>, <span class="plain">selection</span>: <span class="call">Binding</span>(
+                    <span class="plain">get</span>: { <span class="plain">arrivalDate</span> },
+                    <span class="plain">set</span>: { <span class="plain">arrivalDate</span> = <span class="plain">$0</span> }
+                ), <span class="plain">displayedComponents</span>: .<span class="plain">date</span>)
+                    .<span class="call">datePickerStyle</span>(.<span class="plain">compact</span>)
+            }
+
+            <span class="call">Section</span>(<span class="string">"Choose port"</span>){
+                <span class="keyword">if</span> <span class="plain">portVm</span>.<span class="plain">ports</span>.<span class="plain">isEmpty</span> {
+                    <span class="call">Text</span>(<span class="string">"No ports"</span>)
+                } <span class="keyword">else</span> {
+                    <span class="call">Picker</span>(<span class="string">"From Port"</span>, <span class="plain">selection</span>: <span class="call">Binding</span>(
+                        <span class="plain">get</span>: { <span class="plain">portId</span> },
+                        <span class="plain">set</span>: { <span class="plain">portId</span> = <span class="plain">$0</span> }
+                    )) {
+                        <span class="call">ForEach</span>(<span class="plain">portVm</span>.<span class="plain">ports</span>){ <span class="plain">port</span> <span class="keyword">in</span>
+                            <span class="call">Text</span>(<span class="plain">port</span>.<span class="plain">name</span>).<span class="call">tag</span>(<span class="plain">port</span>.<span class="plain">id</span>)
+                        }
+                    }
+                }
+            }
+            .<span class="plain">onAppear</span>{ <span class="plain">portVm</span>.<span class="call">timerFetch</span>() }
+            .<span class="plain">onDisappear</span>{ <span class="plain">portVm</span>.<span class="call">stopAutoUpdate</span>() }
+
+            <span class="call">Section</span>(<span class="string">"Choose port"</span>){
+                <span class="keyword">if</span> <span class="plain">portVm</span>.<span class="plain">ports</span>.<span class="plain">isEmpty</span> {
+                    <span class="call">Text</span>(<span class="string">"No ports"</span>)
+                } <span class="keyword">else</span> {
+                    <span class="call">Picker</span>(<span class="string">"To Port"</span>, <span class="plain">selection</span>: <span class="plain">$toPort</span>) {
+                        <span class="call">ForEach</span>(<span class="plain">portVm</span>.<span class="plain">ports</span>){ <span class="plain">port</span> <span class="keyword">in</span>
+                            <span class="call">Text</span>(<span class="plain">port</span>.<span class="plain">name</span>).<span class="call">tag</span>(<span class="plain">port</span>.<span class="plain">name</span>)
+                        }
+                    }
+                }
+            }
+            
+            <span class="call">Section</span>(<span class="string">"Choose ship"</span>){
+                <span class="call">Picker</span>(<span class="string">"Ships"</span>, <span class="plain">selection</span>: <span class="call">Binding</span>(
+                    <span class="plain">get</span>: { <span class="plain">shipId</span> },
+                    <span class="plain">set</span>: { <span class="plain">shipId</span> = <span class="plain">$0</span> }
+                )) {
+                    <span class="call">ForEach</span>(<span class="plain">shipVm</span>.<span class="plain">ships</span>) { <span class="plain">ship</span> <span class="keyword">in</span>
+                        <span class="comment">// Показуємо Юзеру - НАЗВУ (ship.name)</span>
+                        <span class="comment">// Відправляємо в базу - ID (ship.id)</span>
+                        <span class="call">Text</span>(<span class="plain">ship</span>.<span class="plain">name</span>).<span class="call">tag</span>(<span class="plain">ship</span>.<span class="plain">id</span>)
+                    }
+                }
+            }
+            .<span class="plain">onAppear</span>{ <span class="plain">shipVm</span>.<span class="call">timerFetch</span>() }
+        }
+        .<span class="call">navigationTitle</span>(<span class="string">"Add new voyage"</span>)
+        .<span class="plain">onAppear</span> {
+            <span class="call">setDefaultsIfNeeded</span>()
+        }
+        .<span class="plain">onChange</span>(<span class="plain">of</span>: <span class="plain">portVm</span>.<span class="plain">ports</span>) {
+            <span class="call">setDefaultsIfNeeded</span>()
+        }
+        .<span class="plain">onChange</span>(<span class="plain">of</span>: <span class="plain">shipVm</span>.<span class="plain">ships</span>) {
+            <span class="call">setDefaultsIfNeeded</span>()
+        }
+        
+        <span class="call">Button</span>(<span class="string">"Confirm Voyage"</span>) {
+            <span class="call">createVoyage</span>()
+        }
+        .<span class="call">buttonStyle</span>(.<span class="plain">borderedProminent</span>)
+    }
+
+    <span class="keyword">func</span> <span class="call">setDefaultsIfNeeded</span>() {
+        <span class="keyword">if</span> <span class="plain">portId</span>.<span class="plain">isEmpty</span>, <span class="keyword">let</span> <span class="plain">firstPort</span> = <span class="plain">portVm</span>.<span class="plain">ports</span>.<span class="plain">first</span> {
+            <span class="plain">portId</span> = <span class="plain">firstPort</span>.<span class="plain">id</span>
+        }
+        
+        <span class="keyword">if</span> <span class="plain">fromPort</span>.<span class="plain">isEmpty</span>, <span class="keyword">let</span> <span class="plain">firstPort</span> = <span class="plain">portVm</span>.<span class="plain">ports</span>.<span class="plain">first</span> {
+            <span class="plain">fromPort</span> = <span class="plain">firstPort</span>.<span class="plain">name</span>
+        }
+
+        <span class="keyword">if</span> <span class="plain">toPort</span>.<span class="plain">isEmpty</span>, <span class="keyword">let</span> <span class="plain">firstPort</span> = <span class="plain">portVm</span>.<span class="plain">ports</span>.<span class="plain">first</span> {
+            <span class="plain">toPort</span> = <span class="plain">firstPort</span>.<span class="plain">name</span>
+        }
+
+        <span class="keyword">if</span> <span class="plain">shipId</span>.<span class="plain">isEmpty</span>, <span class="keyword">let</span> <span class="plain">firstShip</span> = <span class="plain">shipVm</span>.<span class="plain">ships</span>.<span class="plain">first</span> {
+            <span class="plain">shipId</span> = <span class="plain">firstShip</span>.<span class="plain">id</span>
+        }
+    }
+
+    <span class="keyword">func</span> <span class="call">createVoyage</span>() {
+        <span class="keyword">let</span> <span class="plain">voyageActor</span> = <span class="call">GetVoyages</span>()
+        
+        <span class="call">print</span>(<span class="string">"--- DEBUG VOYAGE DATA ---"</span>)
+        <span class="call">print</span>(<span class="string">"Title: \(title)"</span>)
+        <span class="call">print</span>(<span class="string">"Ship ID: \(shipId)"</span>)
+        <span class="call">print</span>(<span class="string">"From: \(fromPort)"</span>)
+        <span class="call">print</span>(<span class="string">"To: \(toPort)"</span>)
+        <span class="call">print</span>(<span class="string">"Port ID: \(portId)"</span>) <span class="comment">// Перевір, чи він не пустий!</span>
+        <span class="call">print</span>(<span class="string">"-------------------------"</span>)
+        
+        <span class="keyword">let</span> <span class="plain">newVoyage</span> = <span class="call">VoyageDTO</span>(
+            <span class="plain">id</span>: <span class="call">UUID</span>().<span class="plain">uuidString</span>,
+            <span class="plain">title</span>: <span class="plain">title</span>,
+            <span class="plain">status</span>: .<span class="plain">Queued</span>,
+            <span class="plain">departureDate</span>: <span class="plain">departureDate</span>,
+            <span class="plain">arrivalDate</span>: <span class="plain">arrivalDate</span>,
+            <span class="plain">progressPercent</span>: <span class="number">0</span>,
+            <span class="plain">createdBy</span>: <span class="string">"MobileUser"</span>,
+            <span class="plain">createdAt</span>: <span class="type">Date</span>.<span class="plain">now</span>,
+            <span class="plain">updatedAt</span>: <span class="type">Date</span>.<span class="plain">now</span>,
+            <span class="plain">userId</span>: <span class="keyword">nil</span>,
+            <span class="plain">routeId</span>: <span class="keyword">nil</span>,
+            <span class="plain">shipId</span>: <span class="plain">shipId</span>,
+            <span class="plain">workerId</span>: <span class="keyword">nil</span>,
+            <span class="plain">portId</span>: <span class="plain">portId</span>,
+            <span class="plain">containerCounts</span>: <span class="number">0</span>,
+            <span class="plain">fromPort</span>: <span class="plain">fromPort</span>,
+            <span class="plain">toPort</span>: <span class="plain">toPort</span>
+        )
+
+        <span class="keyword">Task</span> {
+            <span class="keyword">do</span> {
+                <span class="keyword">try</span> <span class="keyword">await</span> <span class="plain">voyageActor</span>.<span class="plain">postVoyage</span>(<span class="plain">newVoyage</span>: <span class="plain">newVoyage</span>)
+                <span class="call">print</span>(<span class="string">"✅ Success"</span>)
+                <span class="call">print</span>(<span class="string">"FROM PORT: \(fromPort)"</span>)
+                <span class="call">print</span>(<span class="string">"TO PORT: \(toPort)"</span>)
+                <span class="call">print</span>(<span class="string">"SHIP: \(shipId)"</span>)
+            } <span class="keyword">catch</span> {
+                <span class="call">print</span>(<span class="string">"❌ Fail: \(error)"</span>)
+            }
+        }
+    }
+}
+
+<span class="attribute">#Preview</span> {
+    <span class="call">PlusVoyageView</span>()
+        .<span class="plain">modelContainer</span>(<span class="plain">for</span>: <span class="type">Voyage</span>.<span class="keyword">self</span>, <span class="plain">inMemory</span>: <span class="keyword">true</span>)
+}
+</pre>
+</body>
+</html>

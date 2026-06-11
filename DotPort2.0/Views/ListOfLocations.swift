@@ -5,12 +5,10 @@ struct ListOfLocations: View {
     
     var body: some View {
         List {
-            // Використовуємо ForEach всередині List — це стандарт для SwiftUI
             ForEach(vm.viewModelPorts.ports) { port in
                 Button {
                     vm.showLocation(location: port)
                 } label: {
-                    // Використовуємо HStack замість ZStack для горизонтального розміщення
                     HStack(alignment: .center) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(port.name)
@@ -22,18 +20,14 @@ struct ListOfLocations: View {
                                 .foregroundColor(.secondary)
                         }
                         
-                        Spacer() // Штовхає текст нижче вправо
+                        Spacer()
                         
-
-                        
-                        // Переконайся, що в моделі саме berthCount (через e)
-                        // Якщо все ж таки залишив burthCount — заміни тут назад на u
                         Text("\(port.berthCount)")
                             .font(.system(.body, design: .monospaced))
                             .foregroundColor(.blue)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle()) // Щоб весь рядок був клікабельним
+                    .contentShape(Rectangle())
                 }
                 .padding(.vertical, 4)
                 .listRowBackground(Color.clear)
@@ -44,7 +38,5 @@ struct ListOfLocations: View {
 }
 
 #Preview {
-    // Додаємо контейнер, якщо твоя в'юшка залежить від SwiftData,
-    // або просто валідуємо інтерфейс
     ListOfLocations()
 }

@@ -36,7 +36,6 @@ struct PlusVoyageView: View {
                 ), displayedComponents: .date)
                     .datePickerStyle(.compact)
             }
-            // We must take date from departure date and validate
 
             Section("Choose port"){
                 if portVm.ports.isEmpty {
@@ -57,11 +56,6 @@ struct PlusVoyageView: View {
             .onAppear{portVm.timerFetch()}
             .onDisappear{ portVm.stopAutoUpdate() }
 
-//            Picker("From Port", selection: $portId) {
-//                ForEach(portVm.ports_data, id: \.id) { port in
-//                    Text(port.id).tag(port.id)
-//                }
-//            }
 
             Section("Choose port"){
                 if portVm.ports.isEmpty {

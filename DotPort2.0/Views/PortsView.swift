@@ -10,42 +10,42 @@ import SwiftUI
 struct PortsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var vm = PortsViewModel()
+
     var body: some View {
-        //        ZStack(alignment: .topLeading){
-        ScrollView{
-            ForEach(vm.ports){ port in
-                NavigationLink(destination: DetailedPortView(port: port)){
-                    VStack{
-                        HStack{
+        ScrollView {
+            ForEach(vm.ports) { port in
+                let stats = vm.stats(for: port)
+
+                NavigationLink(destination: DetailedPortView(port: port)) {
+                    VStack {
+                        HStack {
                             Text("Port of \(port.name)")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             Spacer()
-                            Text("Ships count: \(port.shipsCount)")
+                            Text("Active voyages: \(stats.activeVoyages)")
                         }
                         .padding()
                         Divider()
                             .background(Color(.white))
-                        HStack{
-                            VStack{
+                        HStack {
+                            VStack {
                                 Text("Total Berth")
-                                Text("\(port.berthCount)")
+                                Text("\(stats.totalBerths)")
                             }
-                            
                             .padding(2)
                             Spacer()
-                            VStack{
+                            VStack {
                                 Text("Available")
-                                Text("\(port.berthCount)")
+                                Text("\(stats.availableBerths)")
                                     .foregroundColor(.green)
                             }
                             Spacer()
-                            VStack{
+                            VStack {
                                 Text("In queue")
-                                Text("\(port.berthCount)")
+                                Text("\(stats.inQueue)")
                                     .foregroundColor(.red)
                             }
-                            
                         }
                         .padding()
                         .font(.system(size: 15))
@@ -53,7 +53,6 @@ struct PortsView: View {
                         .foregroundColor(.white)
                     }
                 }
-                
                 .fontDesign(.monospaced)
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,22 +62,16 @@ struct PortsView: View {
                 .cornerRadius(12)
                 .padding(10)
                 .shadow(radius: 5)
-                
                 .navigationTitle("Ports")
             }
-            
-//            .ignoresSafeArea()
-//            .navigationBarBackButtonHidden(false)
-//            .navigationBarHidden(true)
-            
+
             Spacer()
-            
         }
-        .onAppear{vm.timerFetch()}
-        .onDisappear{vm.stopAutoUpdate()}
+        .onAppear { vm.timerFetch() }
+        .onDisappear { vm.stopAutoUpdate() }
     }
-    
 }
+
 #Preview {
     PortsView()
 }

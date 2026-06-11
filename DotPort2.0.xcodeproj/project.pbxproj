@@ -36,6 +36,7 @@
 		9DAA8F9C2F44E37500EE3FD8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F9B2F44E37500EE3FD8 /* MainView.swift */; };
 		9DAA8F9E2F47197D00EE3FD8 /* mainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F9D2F47197D00EE3FD8 /* mainViewModel.swift */; };
 		9DAA8FA02F47533700EE3FD8 /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8F9F2F47533700EE3FD8 /* StatisticsModel.swift */; };
+		9DEAD0012FA9999900DEF001 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEAD0022FA9999900DEF001 /* DemoData.swift */; };
 		9DAA8FA22F477E1200EE3FD8 /* mocs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FA12F477E1100EE3FD8 /* mocs.swift */; };
 		9DAA8FA62F47933800EE3FD8 /* DetailedVoyageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FA52F47933800EE3FD8 /* DetailedVoyageView.swift */; };
 		9DAA8FA82F47964F00EE3FD8 /* PortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA8FA72F47964F00EE3FD8 /* PortsView.swift */; };
@@ -119,6 +120,7 @@
 		9DAA8F9B2F44E37500EE3FD8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9DAA8F9D2F47197D00EE3FD8 /* mainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewModel.swift; sourceTree = "<group>"; };
 		9DAA8F9F2F47533700EE3FD8 /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
+		9DEAD0022FA9999900DEF001 /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 		9DAA8FA12F477E1100EE3FD8 /* mocs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mocs.swift; sourceTree = "<group>"; };
 		9DAA8FA52F47933800EE3FD8 /* DetailedVoyageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVoyageView.swift; sourceTree = "<group>"; };
 		9DAA8FA72F47964F00EE3FD8 /* PortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortsView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				9DAA8F562F30CF7D00EE3FD8 /* ContentView.swift */,
 				9DAA8F582F30CF7F00EE3FD8 /* Assets.xcassets */,
 				9DAA8F5A2F30CF7F00EE3FD8 /* Preview Content */,
+				9DEAD0022FA9999900DEF001 /* DemoData.swift */,
 				9DAA8FA12F477E1100EE3FD8 /* mocs.swift */,
 				9DAA8FD42F5866C100EE3FD8 /* WidgetAttributes.swift */,
 				9DAA8FD72F58FED000EE3FD8 /* ActivityManager.swift */,
@@ -417,6 +420,7 @@
 				9DAA8F852F44B71200EE3FD8 /* loginModel.swift in Sources */,
 				9D856A8B2F76F3B5001EDC5D /* PortService.swift in Sources */,
 				9DAA8FB62F4A763C00EE3FD8 /* VoyageViewModel.swift in Sources */,
+				9DEAD0012FA9999900DEF001 /* DemoData.swift in Sources */,
 				9DAA8FA22F477E1200EE3FD8 /* mocs.swift in Sources */,
 				9DAA8FAE2F48916D00EE3FD8 /* DetailedPortView.swift in Sources */,
 				9D5FFA972FA8E00200DD98A6 /* Authentication.swift in Sources */,

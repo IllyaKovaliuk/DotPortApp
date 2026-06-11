@@ -36,39 +36,6 @@ class ShipsViewModel: ObservableObject{
         return totalFuel
     }
     
-//    func validateContainers(ship: ShipModel, currentLoad: Int){
-//        let maxContainers = ship.capacity_containers
-//        if currentLoad <= maxContainers {
-//            print("We add your container to our ship")
-//        } else{
-//            Alert(title: Text("Перегруз"))
-//        }
-//        
-//    }
-    
-//    func containersError(ship: ShipModel) throws {
-//        var maxContainers = self.ship.capacityContainers
-//        var currentLoad = self.ship.currentLoad
-//        
-//        guard currentLoad! < maxContainers! else {          //форс анврап можуть бути проблеми
-//            throw shipError.invalidCapacity
-//        }
-//        
-//        guard maxContainers! > 0 else{                      //форс анврап можуть бути проблеми
-//            throw shipError.invalidCountContainers
-//        }
-//    }
-    
-//    
-//    func addContainer(oneConatiner: Int){
-//        do {
-//            try containersError(ship: self.ship)
-//            self.ship.currentLoad? += oneConatiner
-//            print("Контейнер додано успішно!")
-//        } catch {
-//            print("Помилка: \(error)")        }
-//    }
-    
     func fetchShips() async throws {
         
         await MainActor.run { isLoading = true }

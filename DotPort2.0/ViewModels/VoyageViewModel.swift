@@ -10,7 +10,7 @@ import MapKit
 import SwiftData
 
 class VoyageViewModel: ObservableObject {
-    @Published var voyages: [Voyage] = []
+    @Published var voyages: [VoyageItem] = []
     @Published var isLoading: Bool = false
     private var timer: Timer?
     
@@ -64,8 +64,7 @@ class VoyageViewModel: ObservableObject {
     }
     
     func takeLong(port: PortModel) -> CLLocationDegrees{
-        let longtitude = port.longtitude
-        return longtitude
+        return port.longtitude ?? 0
     }
     
     func takeLat(port: PortModel) -> CLLocationDegrees{

@@ -34,19 +34,14 @@ class PlusViewModel: ObservableObject{
                self.voyage = newVoyage
            }
         
-//        let descriptor = FetchDescriptor<PortModel>()
-//        self.ports = (try? context.fetch(descriptor)) ?? []
        }
     
     func createVoyage() {
         let voyageActor = GetVoyages()
-        
-        // 1. Створюємо DTO правильно (використовуємо ініціалізатор структури, а не кортеж)
-        // 2. Передаємо конкретне значення статусу (self.status), а не назву типу (VoyageStatus)
         let newVoyage = VoyageDTO(
             id: UUID().uuidString,
             title: title,
-            status: self.status, // Передаємо саме змінну зі значенням
+            status: self.status,
             departureDate: departureDate,
             arrivalDate: arrivalDate,
             progressPercent: progressPercent,

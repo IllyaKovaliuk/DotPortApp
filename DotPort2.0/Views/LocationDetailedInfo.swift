@@ -48,6 +48,6 @@ struct LocationDetailedInfo: View {
     }
 }
 
-#Preview {
-    LocationDetailedInfo(location: Mocks.port1)
-}
+//#Preview {
+//    LocationDetailedInfo(location: Mocks.port1)
+//}

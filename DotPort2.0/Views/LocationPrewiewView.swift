@@ -32,9 +32,9 @@ struct LocationPrewiewView: View {
     }
 }
 
-#Preview {
-    LocationPrewiewView(location: Mocks.port1)
-}
+//#Preview {
+//    LocationPrewiewView(location: Mocks.port1)
+//}
 
 
 extension LocationPrewiewView{

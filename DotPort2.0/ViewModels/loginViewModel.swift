@@ -7,8 +7,8 @@
 
 import Foundation
 
-
-class loginVM: ObservableObject{
+@MainActor
+class loginVM: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage: String = ""
@@ -16,66 +16,62 @@ class loginVM: ObservableObject{
     @Published var isRegistered: Bool = false
     @Published var user: UserModel? = nil
     @Published var isLoading: Bool = false
-    private var timer: Timer?
-    
-    var isValid : Bool {
+
+    var isValid: Bool {
         !email.isEmpty && email.contains("@") && password.count >= 6
     }
-    
-    func loginUser(){
-        if !isValid {
-            errorMessage = "Please something wrong in your email or password"
+
+    func loginUser() async {
+        guard isValid else {
+            errorMessage = "Перевір email і пароль (мін. 6 символів)"
             showError = true
             return
         }
-        
-        print("Login in with \(email)")
-        
-    }
-    
-    func fetchUser() async throws{
-        await MainActor.run { isLoading = true }
-        
-        do{
-            let user = try await Authentication().getUserInfo(email: email)
-            
-            await MainActor.run {
-                self.user = user
-                self.isLoading = false
-            }
-            
-        } catch {
-            
-            print("Sorry we are in trouble and try to fix errors")
-            
-            await MainActor.run {
-                self.isLoading = false
-            }
-        }
-        
-    }
-    
-    func userCheck() async throws {
-        if user?.isRegistered != false {
-            try? await fetchUser()
-        } else {
-            print("You are not registered")
-        }
-    }
-    
-    func timerFetch() {
-        Task { try await fetchUser() }
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
-            Task{ try await self.fetchUser() }
-        }
-    }
-    
-    func stopAutoUpdate() {
-            timer?.invalidate()
-        }
-}
 
-struct registerVM{
-    
+        isLoading = true
+        showError = false
+        errorMessage = ""
+
+        do {
+            let response = try await AuthService().login(email: email, password: password)
+            user = response.user
+            isRegistered = response.user.isRegistered
+        } catch {
+            errorMessage = "Невірний email або пароль"
+            showError = true
+            print("❌ loginVM error:", error)
+        }
+
+        isLoading = false
+    }
+
+    func registerUser(role: String, workerId: String = "", portId: String = "") async {
+        guard isValid else {
+            errorMessage = "Перевір email і пароль (мін. 6 символів)"
+            showError = true
+            return
+        }
+
+        isLoading = true
+        showError = false
+        errorMessage = ""
+
+        do {
+            let response = try await AuthService().register(
+                email: email,
+                password: password,
+                role: role,
+                workerId: workerId.isEmpty ? nil : workerId,
+                portId: portId.isEmpty ? nil : portId
+            )
+            user = response.user
+            isRegistered = response.user.isRegistered
+        } catch {
+            errorMessage = "Не вдалося зареєструватись"
+            showError = true
+            print("❌ registerVM error:", error)
+        }
+
+        isLoading = false
+    }
 }
